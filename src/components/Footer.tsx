@@ -14,7 +14,7 @@ const Footer = () => {
                 <div className="grid md:grid-cols-4 gap-8">
                     <div>
                         <h3 className="font-bold text-lg">Company</h3>
-                        <ul className="mt-4 space-y-2 text-muted-foreground">
+                        <ul className="mt-4 space-y-2 text-muted-foreground text-sm">
                             <li><a href="#" className="hover:text-foreground">Case Studies</a></li>
                             <li><a href="#" className="hover:text-foreground">Services</a></li>
                             <li><a href="#" className="hover:text-foreground">About Us</a></li>
@@ -23,7 +23,7 @@ const Footer = () => {
                     </div>
                     <div>
                         <h3 className="font-bold text-lg">Services</h3>
-                        <ul className="mt-4 space-y-2 text-muted-foreground">
+                        <ul className="mt-4 space-y-2 text-muted-foreground text-sm">
                             <li><a href="#" className="hover:text-foreground">Websites</a></li>
                             <li><a href="#" className="hover:text-foreground">Web Apps</a></li>
                             <li><a href="#" className="hover:text-foreground">Mobile Apps</a></li>
@@ -32,7 +32,7 @@ const Footer = () => {
                     </div>
                     <div>
                         <h3 className="font-bold text-lg">Connect</h3>
-                        <ul className="mt-4 space-y-2 text-muted-foreground">
+                        <ul className="mt-4 space-y-2 text-muted-foreground text-sm">
                             <li><a href="#" className="hover:text-foreground">Privacy Policy</a></li>
                             <li><a href="#" className="hover:text-foreground">Terms of Use</a></li>
                         </ul>
