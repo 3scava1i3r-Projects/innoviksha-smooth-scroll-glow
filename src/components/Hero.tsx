@@ -4,14 +4,24 @@ import { Award, BarChart, Code } from 'lucide-react';
 import { useEffect, useRef, useState } from "react";
 import Anime from 'react-anime';
 
-const userTexts = [
-  "SaaS Platforms. AI Agents. Internal Tools. MVPs.",
-  "Custom Software. AI Workflows. Web Apps. Bots.",
-  "Dashboards. Scripts. CRMs. Automation Pipelines.",
-  "AI Integrations. Web Portals. APIs. Backend Systems.",
+const rotatingTexts = [
+  "SaaS Platforms",
+  "AI Agents",
+  "Internal Tools",
+  "MVPs",
+  "Custom Software",
+  "AI Workflows",
+  "Web Apps",
+  "Bots",
+  "Dashboards",
+  "Scripts",
+  "CRMs",
+  "Automation Pipelines",
+  "AI Integrations",
+  "Web Portals",
+  "APIs",
+  "Backend Systems",
 ];
-
-const allTexts = ["World-Class Digital Products", ...userTexts];
 
 const Hero = () => {
   const { setCursorType } = useCursor();
@@ -35,7 +45,7 @@ const Hero = () => {
       // Start text rotation after initial animations
       setTimeout(() => {
         textAnimationInterval = window.setInterval(() => {
-          setTextIndex(prevIndex => (prevIndex + 1) % allTexts.length);
+          setTextIndex(prevIndex => (prevIndex + 1) % rotatingTexts.length);
         }, 3000);
       }, 1200);
     };
@@ -67,7 +77,7 @@ const Hero = () => {
             className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tighter leading-tight h-48 md:h-56 lg:h-72 flex items-center justify-center"
             key={textIndex}
           >
-            {allTexts[textIndex]}
+            World-Class {rotatingTexts[textIndex]}
           </h1>
         </Anime>
 
