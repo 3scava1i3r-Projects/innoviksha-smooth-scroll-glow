@@ -1,7 +1,7 @@
 import { useCursor } from "@/contexts/CursorContext";
 import { Award, BarChart, Code } from 'lucide-react';
 import { useEffect, useRef, useState } from "react";
-import anime from "animejs/lib/anime.es.js";
+import anime from "animejs";
 
 const userTexts = [
   "SaaS Platforms. AI Agents. Internal Tools. MVPs.",
