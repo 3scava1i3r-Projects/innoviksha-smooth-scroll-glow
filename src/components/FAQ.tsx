@@ -42,7 +42,15 @@ const FAQ = () => {
                         {faqs.map((faq, index) => (
                             <AccordionItem key={index} value={`item-${index}`}>
                                 <AccordionTrigger className="text-lg font-semibold text-left py-4 hover:no-underline">{faq.question}</AccordionTrigger>
-                                <AccordionContent className="text-muted-foreground pb-4">{faq.answer}</AccordionContent>
+                                <AccordionContent className="text-muted-foreground pb-4">
+                                    <motion.p
+                                        initial={{ opacity: 0, y: -10 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        transition={{ duration: 0.3 }}
+                                    >
+                                      {faq.answer}
+                                    </motion.p>
+                                </AccordionContent>
                             </AccordionItem>
                         ))}
                     </Accordion>

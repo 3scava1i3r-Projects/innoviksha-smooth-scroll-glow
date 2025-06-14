@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -9,6 +8,9 @@ import NotFound from "./pages/NotFound";
 import { CursorProvider } from "./contexts/CursorContext";
 import CustomCursor from "./components/CustomCursor";
 import { ReactLenis } from "@studio-freight/react-lenis";
+import CaseStudies from "./pages/CaseStudies";
+import ServicesPage from "./pages/ServicesPage";
+import ContactUs from "./pages/ContactUs";
 
 const queryClient = new QueryClient();
 
@@ -23,6 +25,9 @@ const App = () => (
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<Index />} />
+              <Route path="/case-studies" element={<CaseStudies />} />
+              <Route path="/services" element={<ServicesPage />} />
+              <Route path="/contact-us" element={<ContactUs />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>

@@ -1,4 +1,3 @@
-
 import { useCursor } from "@/contexts/CursorContext";
 import { Award, BarChart, Code } from 'lucide-react';
 import { useEffect, useRef, useState } from "react";
@@ -75,9 +74,18 @@ const Hero = () => {
           <h1 
             ref={h1Ref}
             className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tighter leading-tight h-48 md:h-56 lg:h-72 flex items-center justify-center"
-            key={textIndex}
           >
-            World-Class {rotatingTexts[textIndex]}
+            <span>World-Class&nbsp;</span>
+            <Anime
+              _tagName="span"
+              key={textIndex}
+              opacity={[0, 1]}
+              translateY={[20, 0]}
+              duration={800}
+              easing="easeOutExpo"
+            >
+              {rotatingTexts[textIndex]}
+            </Anime>
           </h1>
         </Anime>
 
