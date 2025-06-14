@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useCursor } from '../contexts/CursorContext';
 import { motion } from 'framer-motion';
@@ -22,8 +23,7 @@ const CustomCursor: React.FC = () => {
       y: position.y - 8,
       height: 16,
       width: 16,
-      border: '1px solid hsl(var(--primary))',
-      backgroundColor: 'transparent',
+      backgroundColor: 'hsl(var(--primary))',
       mixBlendMode: 'difference',
     },
     hover: {
@@ -31,8 +31,7 @@ const CustomCursor: React.FC = () => {
       y: position.y - 32,
       height: 64,
       width: 64,
-      border: '1px solid #fff',
-      backgroundColor: 'transparent',
+      backgroundColor: '#fff',
       mixBlendMode: 'difference',
     },
   };
