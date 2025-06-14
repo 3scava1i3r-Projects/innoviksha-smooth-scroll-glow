@@ -1,4 +1,3 @@
-
 import { useCursor } from "@/contexts/CursorContext";
 import { Award, BarChart, Code } from 'lucide-react';
 import { useEffect, useRef, useState } from "react";
@@ -74,9 +73,8 @@ const Hero = () => {
         >
           <h1 
             ref={h1Ref}
-            className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tighter leading-tight h-24 md:h-28 lg:h-32 flex items-center justify-center"
+            className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tighter leading-tight h-16 md:h-20 flex items-center justify-center"
           >
-            <span>World-Class&nbsp;</span>
             <div className="w-[22ch] text-left">
               <Anime
                 _tagName="span"
