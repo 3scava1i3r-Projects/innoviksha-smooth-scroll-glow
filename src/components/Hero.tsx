@@ -1,7 +1,8 @@
+
 import { useCursor } from "@/contexts/CursorContext";
 import { Award, BarChart, Code } from 'lucide-react';
 import { useEffect, useRef, useState } from "react";
-import anime from "animejs";
+import Anime from 'react-anime';
 
 const userTexts = [
   "SaaS Platforms. AI Agents. Internal Tools. MVPs.",
@@ -18,62 +19,34 @@ const Hero = () => {
   const h2Ref = useRef(null);
   const detailsRef = useRef(null);
   const [textIndex, setTextIndex] = useState(0);
+  const [animateDetails, setAnimateDetails] = useState(false);
+  const [animateH2, setAnimateH2] = useState(false);
+  const [animateH1, setAnimateH1] = useState(false);
 
   useEffect(() => {
     let textAnimationInterval: number;
 
-    const tl = anime.timeline({
-      easing: 'easeOutExpo',
-    });
+    // Start animations in sequence
+    const startAnimations = () => {
+      setTimeout(() => setAnimateH1(true), 100);
+      setTimeout(() => setAnimateH2(true), 200);
+      setTimeout(() => setAnimateDetails(true), 400);
+      
+      // Start text rotation after initial animations
+      setTimeout(() => {
+        textAnimationInterval = window.setInterval(() => {
+          setTextIndex(prevIndex => (prevIndex + 1) % allTexts.length);
+        }, 3000);
+      }, 1200);
+    };
 
-    tl.add({
-      targets: h1Ref.current,
-      opacity: [0, 1],
-      translateY: [20, 0],
-      duration: 800,
-      delay: 100,
-    })
-    .add({
-      targets: h2Ref.current,
-      opacity: [0, 1],
-      translateY: [20, 0],
-      duration: 800,
-    }, '-=600')
-    .add({
-      targets: detailsRef.current.children,
-      opacity: [0, 1],
-      translateY: [20, 0],
-      duration: 800,
-      delay: anime.stagger(100),
-    }, '-=400');
-
-    tl.finished.then(() => {
-      textAnimationInterval = window.setInterval(() => {
-        anime({
-          targets: h1Ref.current,
-          opacity: 0,
-          translateY: -20,
-          duration: 400,
-          easing: 'easeInExpo',
-          complete: () => {
-            setTextIndex(prevIndex => (prevIndex + 1) % allTexts.length);
-            anime({
-              targets: h1Ref.current,
-              translateY: [20, 0],
-              opacity: 1,
-              duration: 400,
-              easing: 'easeOutExpo',
-            });
-          }
-        });
-      }, 3000);
-    });
+    startAnimations();
 
     return () => {
       if (textAnimationInterval) {
         clearInterval(textAnimationInterval);
       }
-    }
+    };
   }, []);
 
   return (
@@ -83,35 +56,77 @@ const Hero = () => {
       onMouseLeave={() => setCursorType('default')}
     >
       <div className="container mx-auto text-center">
-        <h1 
-          ref={h1Ref}
-          className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tighter leading-tight opacity-0 h-48 md:h-56 lg:h-72 flex items-center justify-center"
+        <Anime
+          opacity={animateH1 ? [0, 1] : 0}
+          translateY={animateH1 ? [20, 0] : 20}
+          duration={800}
+          easing="easeOutExpo"
         >
-          {allTexts[textIndex]}
-        </h1>
-        <h2 
-          ref={h2Ref}
-          className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tighter leading-tight text-muted-foreground opacity-0"
+          <h1 
+            ref={h1Ref}
+            className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tighter leading-tight h-48 md:h-56 lg:h-72 flex items-center justify-center"
+            key={textIndex}
+          >
+            {allTexts[textIndex]}
+          </h1>
+        </Anime>
+
+        <Anime
+          opacity={animateH2 ? [0, 1] : 0}
+          translateY={animateH2 ? [20, 0] : 20}
+          duration={800}
+          easing="easeOutExpo"
         >
-          On-Time. On-Budget. On-Point.
-        </h2>
+          <h2 
+            ref={h2Ref}
+            className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tighter leading-tight text-muted-foreground"
+          >
+            On-Time. On-Budget. On-Point.
+          </h2>
+        </Anime>
 
         <div 
           ref={detailsRef}
           className="mt-12 flex justify-center gap-8 md:gap-12 text-sm text-muted-foreground"
         >
-            <div className="flex items-center gap-2 opacity-0">
-                <Award size={16} />
-                <span>Award-winning</span>
+          <Anime
+            opacity={animateDetails ? [0, 1] : 0}
+            translateY={animateDetails ? [20, 0] : 20}
+            duration={800}
+            delay={0}
+            easing="easeOutExpo"
+          >
+            <div className="flex items-center gap-2">
+              <Award size={16} />
+              <span>Award-winning</span>
             </div>
-            <div className="flex items-center gap-2 opacity-0">
-                <BarChart size={16} />
-                <span>Results-driven</span>
+          </Anime>
+
+          <Anime
+            opacity={animateDetails ? [0, 1] : 0}
+            translateY={animateDetails ? [20, 0] : 20}
+            duration={800}
+            delay={100}
+            easing="easeOutExpo"
+          >
+            <div className="flex items-center gap-2">
+              <BarChart size={16} />
+              <span>Results-driven</span>
             </div>
-            <div className="flex items-center gap-2 opacity-0">
-                <Code size={16} />
-                <span>Expert developers</span>
+          </Anime>
+
+          <Anime
+            opacity={animateDetails ? [0, 1] : 0}
+            translateY={animateDetails ? [20, 0] : 20}
+            duration={800}
+            delay={200}
+            easing="easeOutExpo"
+          >
+            <div className="flex items-center gap-2">
+              <Code size={16} />
+              <span>Expert developers</span>
             </div>
+          </Anime>
         </div>
       </div>
     </section>
