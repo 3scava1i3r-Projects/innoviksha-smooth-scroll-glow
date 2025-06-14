@@ -1,0 +1,75 @@
+
+import {
+    Accordion,
+    AccordionContent,
+    AccordionItem,
+    AccordionTrigger,
+} from "@/components/ui/accordion"
+import { useCursor } from "@/contexts/CursorContext"
+
+const services = [
+    {
+        title: "Websites",
+        description: "We build high-performing, beautiful websites that are fast, secure, and easy to manage. Our websites are designed to convert visitors into customers.",
+        subServices: ["Strategy & Prototyping", "Web & Mobile Design", "Front-end Development", "CMS & E-commerce"],
+    },
+    {
+        title: "Web Apps",
+        description: "From complex enterprise platforms to user-friendly consumer apps, we build scalable and robust web applications that solve real-world problems.",
+         subServices: ["Product Discovery", "UX/UI Design", "Full-stack Development", "API Integrations"],
+    },
+    {
+        title: "Mobile Apps",
+        description: "We design and develop native and cross-platform mobile apps for iOS and Android that deliver engaging experiences to your users.",
+        subServices: ["iOS Development", "Android Development", "React Native", "Firebase Integration"],
+    },
+    {
+        title: "AI Automation",
+        description: "Leverage the power of AI to automate your business processes, improve efficiency, and drive growth. We build custom AI solutions tailored to your needs.",
+        subServices: ["Process Analysis", "AI Model Integration", "Custom Chatbots", "Workflow Automation"],
+    },
+]
+
+const Services = () => {
+    const { setCursorType } = useCursor();
+    return (
+        <section 
+            className="dark bg-background text-foreground"
+            onMouseEnter={() => setCursorType('default')}
+            onMouseLeave={() => setCursorType('default')}
+        >
+            <div className="container mx-auto">
+                <div className="max-w-2xl">
+                    <p className="text-sm font-semibold uppercase text-primary tracking-widest">Our Services</p>
+                    <h2 className="mt-6 text-3xl md:text-4xl font-bold leading-tight tracking-tighter">
+                        World-class digital products and five-star services.
+                    </h2>
+                </div>
+
+                <div className="mt-16">
+                    <Accordion type="single" collapsible className="w-full" defaultValue="item-0">
+                        {services.map((service, index) => (
+                            <AccordionItem key={index} value={`item-${index}`} className="border-b border-border/50">
+                                <AccordionTrigger className="text-2xl md:text-3xl font-bold py-8 hover:no-underline text-left">
+                                    {service.title}
+                                </AccordionTrigger>
+                                <AccordionContent className="pb-8">
+                                    <div className="grid md:grid-cols-2 gap-8">
+                                        <p className="text-muted-foreground">{service.description}</p>
+                                        <div className="grid grid-cols-2 gap-4 text-sm">
+                                            {service.subServices.map((sub) => (
+                                                <p key={sub}>{sub}</p>
+                                            ))}
+                                        </div>
+                                    </div>
+                                </AccordionContent>
+                            </AccordionItem>
+                        ))}
+                    </Accordion>
+                </div>
+            </div>
+        </section>
+    )
+}
+
+export default Services;
