@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import { CursorProvider } from "./contexts/CursorContext";
 import CustomCursor from "./components/CustomCursor";
+import { ReactLenis } from "@studio-freight/react-lenis";
 
 const queryClient = new QueryClient();
 
@@ -18,13 +19,15 @@ const App = () => (
       <Sonner />
       <CursorProvider>
         <CustomCursor />
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
+        <ReactLenis root>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Index />} />
+              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </BrowserRouter>
+        </ReactLenis>
       </CursorProvider>
     </TooltipProvider>
   </QueryClientProvider>
