@@ -1,4 +1,3 @@
-
 import {
     Accordion,
     AccordionContent,
@@ -6,6 +5,7 @@ import {
     AccordionTrigger,
 } from "@/components/ui/accordion"
 import { useCursor } from "@/contexts/CursorContext"
+import { motion } from "framer-motion";
 
 const services = [
     {
@@ -28,7 +28,7 @@ const services = [
         description: "Leverage the power of AI to automate your business processes, improve efficiency, and drive growth. We build custom AI solutions tailored to your needs.",
         subServices: ["Process Analysis", "AI Model Integration", "Custom Chatbots", "Workflow Automation"],
     },
-]
+];
 
 const Services = () => {
     const { setCursorType } = useCursor();
@@ -55,10 +55,24 @@ const Services = () => {
                                 </AccordionTrigger>
                                 <AccordionContent className="pb-8">
                                     <div className="grid md:grid-cols-2 gap-8">
-                                        <p className="text-muted-foreground">{service.description}</p>
+                                        <motion.p
+                                          initial={{ opacity: 0, x: -20 }}
+                                          animate={{ opacity: 1, x: 0 }}
+                                          transition={{ duration: 0.5, delay: 0.1 }}
+                                          className="text-muted-foreground"
+                                        >
+                                          {service.description}
+                                        </motion.p>
                                         <div className="grid grid-cols-2 gap-4 text-sm">
-                                            {service.subServices.map((sub) => (
-                                                <p key={sub}>{sub}</p>
+                                            {service.subServices.map((sub, i) => (
+                                                <motion.p 
+                                                  key={sub}
+                                                  initial={{ opacity: 0, x: -20 }}
+                                                  animate={{ opacity: 1, x: 0 }}
+                                                  transition={{ duration: 0.5, delay: 0.2 + i * 0.05 }}
+                                                >
+                                                  {sub}
+                                                </motion.p>
                                             ))}
                                         </div>
                                     </div>

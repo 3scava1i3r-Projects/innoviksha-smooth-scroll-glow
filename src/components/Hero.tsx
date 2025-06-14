@@ -1,16 +1,27 @@
-
 import { useCursor } from "@/contexts/CursorContext";
 import { Award, BarChart, Code } from 'lucide-react';
-import { useEffect, useRef } from "react";
-import anime from "animejs";
+import { useEffect, useRef, useState } from "react";
+import anime from "animejs/lib/anime.es.js";
+
+const userTexts = [
+  "SaaS Platforms. AI Agents. Internal Tools. MVPs.",
+  "Custom Software. AI Workflows. Web Apps. Bots.",
+  "Dashboards. Scripts. CRMs. Automation Pipelines.",
+  "AI Integrations. Web Portals. APIs. Backend Systems.",
+];
+
+const allTexts = ["World-Class Digital Products", ...userTexts];
 
 const Hero = () => {
   const { setCursorType } = useCursor();
   const h1Ref = useRef(null);
   const h2Ref = useRef(null);
   const detailsRef = useRef(null);
+  const [textIndex, setTextIndex] = useState(0);
 
   useEffect(() => {
+    let textAnimationInterval: number;
+
     const tl = anime.timeline({
       easing: 'easeOutExpo',
     });
@@ -35,6 +46,34 @@ const Hero = () => {
       duration: 800,
       delay: anime.stagger(100),
     }, '-=400');
+
+    tl.finished.then(() => {
+      textAnimationInterval = window.setInterval(() => {
+        anime({
+          targets: h1Ref.current,
+          opacity: 0,
+          translateY: -20,
+          duration: 400,
+          easing: 'easeInExpo',
+          complete: () => {
+            setTextIndex(prevIndex => (prevIndex + 1) % allTexts.length);
+            anime({
+              targets: h1Ref.current,
+              translateY: [20, 0],
+              opacity: 1,
+              duration: 400,
+              easing: 'easeOutExpo',
+            });
+          }
+        });
+      }, 3000);
+    });
+
+    return () => {
+      if (textAnimationInterval) {
+        clearInterval(textAnimationInterval);
+      }
+    }
   }, []);
 
   return (
@@ -46,9 +85,9 @@ const Hero = () => {
       <div className="container mx-auto text-center">
         <h1 
           ref={h1Ref}
-          className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tighter leading-tight opacity-0"
+          className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tighter leading-tight opacity-0 h-48 md:h-56 lg:h-72 flex items-center justify-center"
         >
-          World-Class Digital Products
+          {allTexts[textIndex]}
         </h1>
         <h2 
           ref={h2Ref}
