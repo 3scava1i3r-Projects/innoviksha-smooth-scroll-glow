@@ -12,7 +12,7 @@ const Header = () => {
         <h1 className="text-lg font-bold text-foreground">Innoviksha</h1>
         <nav className="hidden md:flex items-center gap-6">
           {navItems.map((item) => (
-            <a key={item} href="#" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+            <a key={item} href="#" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors animated-underline cursor-none">
               {item}
             </a>
           ))}
@@ -32,7 +32,7 @@ const Header = () => {
                   <a
                     key={item}
                     href="#"
-                    className="text-lg font-medium text-muted-foreground hover:text-foreground transition-colors"
+                    className="text-lg font-medium text-muted-foreground hover:text-foreground transition-colors animated-underline cursor-none"
                   >
                     {item}
                   </a>
