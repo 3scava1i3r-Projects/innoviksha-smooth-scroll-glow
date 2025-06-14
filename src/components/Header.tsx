@@ -1,10 +1,10 @@
-
 import { Button } from "@/components/ui/button";
 import { Menu } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Link } from "react-router-dom";
 
 const navItems = [
+  { title: "Process", href: "/process" },
   { title: "Case Studies", href: "/case-studies" },
   { title: "Services", href: "/services" },
   { title: "Testimonials", href: "/testimonials" },
