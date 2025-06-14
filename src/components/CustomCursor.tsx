@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useCursor } from '../contexts/CursorContext';
 import { motion } from 'framer-motion';
