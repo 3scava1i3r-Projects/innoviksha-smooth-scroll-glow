@@ -2,6 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const CTA = () => {
     return (
@@ -17,7 +18,9 @@ const CTA = () => {
                     Let's build or improve your digital product
                 </h2>
                 <div className="mt-10 flex justify-center gap-4">
-                    <Button size="lg">Get a quote <ArrowRight className="ml-2 h-4 w-4" /></Button>
+                    <Button asChild size="lg">
+                        <Link to="/contact-us">Contact us <ArrowRight className="ml-2 h-4 w-4" /></Link>
+                    </Button>
                     <Button size="lg" variant="outline">Schedule a call</Button>
                 </div>
             </div>

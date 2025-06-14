@@ -24,7 +24,7 @@ const Header = () => {
           ))}
         </nav>
         <Button asChild className="hidden md:inline-flex">
-            <Link to="/contact-us">Get a quote</Link>
+            <Link to="/contact-us">Contact us</Link>
         </Button>
         <div className="md:hidden">
           <Sheet>
@@ -46,7 +46,7 @@ const Header = () => {
                   </Link>
                 ))}
                 <Button asChild className="mt-4">
-                  <Link to="/contact-us">Get a quote</Link>
+                  <Link to="/contact-us">Contact us</Link>
                 </Button>
               </nav>
             </SheetContent>
