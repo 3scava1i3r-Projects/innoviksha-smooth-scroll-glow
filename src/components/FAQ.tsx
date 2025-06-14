@@ -44,9 +44,9 @@ const FAQ = () => {
                                 <AccordionTrigger className="text-lg font-semibold text-left py-4 hover:no-underline">{faq.question}</AccordionTrigger>
                                 <AccordionContent className="text-muted-foreground pb-4">
                                     <motion.p
-                                        initial={{ opacity: 0, y: -10 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        transition={{ duration: 0.3 }}
+                                        initial={{ opacity: 0, x: -20 }}
+                                        animate={{ opacity: 1, x: 0 }}
+                                        transition={{ duration: 0.5, delay: 0.1 }}
                                     >
                                       {faq.answer}
                                     </motion.p>
