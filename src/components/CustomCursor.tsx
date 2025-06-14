@@ -23,7 +23,8 @@ const CustomCursor: React.FC = () => {
       y: position.y - 8,
       height: 16,
       width: 16,
-      backgroundColor: 'hsl(var(--primary))',
+      border: '1px solid hsl(var(--primary))',
+      backgroundColor: 'transparent',
       mixBlendMode: 'difference',
     },
     hover: {
@@ -31,7 +32,8 @@ const CustomCursor: React.FC = () => {
       y: position.y - 32,
       height: 64,
       width: 64,
-      backgroundColor: '#fff',
+      border: '1px solid #fff',
+      backgroundColor: 'transparent',
       mixBlendMode: 'difference',
     },
   };
