@@ -6,6 +6,7 @@ import {
     AccordionTrigger,
 } from "@/components/ui/accordion"
 import { useCursor } from "@/contexts/CursorContext"
+import { motion } from "framer-motion";
 
 const faqs = [
   {
@@ -27,7 +28,12 @@ const FAQ = () => {
     return (
         <section>
             <div className="container mx-auto grid md:grid-cols-2 gap-16 items-start">
-                <div>
+                <motion.div
+                    initial={{ opacity: 0, x: -40 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true, amount: 0.3 }}
+                    transition={{ duration: 0.7 }}
+                >
                     <p className="text-sm font-semibold uppercase text-primary tracking-widest">FAQs</p>
                     <h2 className="mt-6 text-3xl md:text-4xl font-bold leading-tight tracking-tighter">
                         Simple answers to big questions.
@@ -40,14 +46,18 @@ const FAQ = () => {
                             </AccordionItem>
                         ))}
                     </Accordion>
-                </div>
-                 <div 
+                </motion.div>
+                 <motion.div 
                     className="w-full aspect-square bg-muted overflow-hidden sticky top-24"
+                    initial={{ opacity: 0, x: 40 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true, amount: 0.3 }}
+                    transition={{ duration: 0.7, delay: 0.1 }}
                     onMouseEnter={() => setCursorType('hover')}
                     onMouseLeave={() => setCursorType('default')}
                 >
                     <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Team working" className="w-full h-full object-cover"/>
-                </div>
+                </motion.div>
             </div>
         </section>
     );

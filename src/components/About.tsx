@@ -1,10 +1,15 @@
 
 import { useCursor } from "@/contexts/CursorContext";
+import { motion } from "framer-motion";
 
 const About = () => {
     const { setCursorType } = useCursor();
     return (
-        <section
+        <motion.section
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.7 }}
             onMouseEnter={() => setCursorType('default')}
             onMouseLeave={() => setCursorType('default')}
         >
@@ -28,7 +33,7 @@ const About = () => {
                     </div>
                 </div>
             </div>
-        </section>
+        </motion.section>
     );
 };
 

@@ -2,6 +2,7 @@
 import { useCursor } from "@/contexts/CursorContext";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
 
 const projects = [
   {
@@ -31,21 +32,35 @@ const Projects = () => {
     return (
         <section>
             <div className="container mx-auto">
-                <div className="text-center max-w-2xl mx-auto">
+                <motion.div 
+                    className="text-center max-w-2xl mx-auto"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.5 }}
+                    transition={{ duration: 0.6 }}
+                >
                     <p className="text-sm font-semibold uppercase text-primary tracking-widest">Our Work</p>
                     <h2 className="mt-6 text-3xl md:text-4xl font-bold leading-tight tracking-tighter">
                         High-performing digital products with great designs.
                     </h2>
-                </div>
+                </motion.div>
 
                 <div className="mt-16 grid md:grid-cols-2 gap-8 md:gap-16">
                     {projects.map((project, index) => (
-                        <div key={index} className="group"
-                             onMouseEnter={() => setCursorType('hover')}
-                             onMouseLeave={() => setCursorType('default')}
+                        <motion.div 
+                            key={index} 
+                            className="group"
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, amount: 0.2 }}
+                            transition={{ duration: 0.5, delay: index * 0.1 }}
                         >
                             <a href="#">
-                                <div className="overflow-hidden bg-muted aspect-video">
+                                <div 
+                                    className="overflow-hidden bg-muted aspect-video"
+                                    onMouseEnter={() => setCursorType('hover')}
+                                    onMouseLeave={() => setCursorType('default')}
+                                >
                                     <img src={project.imgSrc} alt={project.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                                 </div>
                                 <div className="mt-4">
@@ -53,7 +68,7 @@ const Projects = () => {
                                     <h3 className="text-lg font-semibold mt-1">{project.title}</h3>
                                 </div>
                             </a>
-                        </div>
+                        </motion.div>
                     ))}
                 </div>
 
