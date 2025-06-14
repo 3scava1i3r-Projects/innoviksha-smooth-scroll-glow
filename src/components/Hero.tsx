@@ -77,16 +77,18 @@ const Hero = () => {
             className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tighter leading-tight h-24 md:h-28 lg:h-32 flex items-center justify-center"
           >
             <span>World-Class&nbsp;</span>
-            <Anime
-              _tagName="span"
-              key={textIndex}
-              opacity={[0, 1]}
-              translateY={[20, 0]}
-              duration={800}
-              easing="easeOutExpo"
-            >
-              {rotatingTexts[textIndex]}
-            </Anime>
+            <div className="w-[22ch] text-left">
+              <Anime
+                _tagName="span"
+                key={textIndex}
+                opacity={[0, 1]}
+                translateY={[20, 0]}
+                duration={800}
+                easing="easeOutExpo"
+              >
+                {rotatingTexts[textIndex]}
+              </Anime>
+            </div>
           </h1>
         </Anime>
 

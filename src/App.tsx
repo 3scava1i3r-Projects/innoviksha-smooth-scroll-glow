@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -11,6 +12,7 @@ import { ReactLenis } from "@studio-freight/react-lenis";
 import CaseStudies from "./pages/CaseStudies";
 import ServicesPage from "./pages/ServicesPage";
 import ContactUs from "./pages/ContactUs";
+import Testimonials from "./pages/Testimonials";
 
 const queryClient = new QueryClient();
 
@@ -27,6 +29,7 @@ const App = () => (
               <Route path="/" element={<Index />} />
               <Route path="/case-studies" element={<CaseStudies />} />
               <Route path="/services" element={<ServicesPage />} />
+              <Route path="/testimonials" element={<Testimonials />} />
               <Route path="/contact-us" element={<ContactUs />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
