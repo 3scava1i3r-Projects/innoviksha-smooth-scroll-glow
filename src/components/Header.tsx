@@ -9,7 +9,7 @@ const Header = () => {
   return (
     <header className="fixed top-0 left-0 right-0 z-40 bg-background/80 backdrop-blur-sm">
       <div className="container mx-auto flex h-20 items-center justify-between">
-        <h1 className="text-lg font-bold text-foreground">Innoviksha Solutions LLP</h1>
+        <h1 className="text-lg font-bold text-foreground">Innoviksha</h1>
         <nav className="hidden md:flex items-center gap-6">
           {navItems.map((item) => (
             <a key={item} href="#" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">

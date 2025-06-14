@@ -38,7 +38,7 @@ const Footer = () => {
                         </ul>
                     </div>
                     <div>
-                        <h3 className="font-bold text-lg">Innoviksha Solutions LLP</h3>
+                        <h3 className="font-bold text-lg">Innoviksha</h3>
                         <p className="text-muted-foreground mt-4 text-sm">World-Class Digital Products.</p>
                         <div className="flex gap-4 mt-4">
                             <a href="#" className="text-muted-foreground hover:text-foreground"><Twitter size={20}/></a>
@@ -48,7 +48,7 @@ const Footer = () => {
                     </div>
                 </div>
                 <div className="mt-16 pt-8 border-t border-border/50 text-sm text-muted-foreground flex justify-between items-center">
-                    <p>&copy; {new Date().getFullYear()} Innoviksha Solutions LLP. All rights reserved.</p>
+                    <p>&copy; {new Date().getFullYear()} Innoviksha. All rights reserved.</p>
                     <div className="flex gap-4 font-semibold">
                         <span>Awwwards</span>
                         <span>Clutch</span>
