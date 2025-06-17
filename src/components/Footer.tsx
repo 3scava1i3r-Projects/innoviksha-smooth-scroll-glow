@@ -2,6 +2,8 @@
 import { useCursor } from "@/contexts/CursorContext"
 import { Dribbble, Instagram, Linkedin, X } from "lucide-react";
 
+
+
 const Footer = () => {
     const { setCursorType } = useCursor();
     return (
@@ -15,10 +17,10 @@ const Footer = () => {
                     <div>
                         <h3 className="font-bold text-lg">Company</h3>
                         <ul className="mt-4 space-y-2 text-muted-foreground text-xs">
-                            <li><a href="#" className="hover:text-foreground cursor-none">Case Studies</a></li>
-                            <li><a href="#" className="hover:text-foreground cursor-none">Services</a></li>
-                            <li><a href="#" className="hover:text-foreground cursor-none">About Us</a></li>
-                            <li><a href="#" className="hover:text-foreground cursor-none">Contact</a></li>
+                            <li><a href="/case-studies" className="hover:text-foreground cursor-none">Case Studies</a></li>
+                            <li><a href="/services" className="hover:text-foreground cursor-none">Services</a></li>
+                            {/* <li><a href="#" className="hover:text-foreground cursor-none">About Us</a></li> soon */}
+                            <li><a href="/contact-us" className="hover:text-foreground cursor-none">Contact</a></li>
                         </ul>
                     </div>
                     <div>
@@ -33,8 +35,8 @@ const Footer = () => {
                     <div>
                         <h3 className="font-bold text-lg">Connect</h3>
                         <ul className="mt-4 space-y-2 text-muted-foreground text-xs">
-                            <li><a href="#" className="hover:text-foreground cursor-none">Privacy Policy</a></li>
-                            <li><a href="#" className="hover:text-foreground cursor-none">Terms of Use</a></li>
+                            {/* <li><a href="/privacy-policy" className="hover:text-foreground cursor-none">Privacy Policy</a></li> Soon */}
+                            <li><a href="/terms-of-use" className="hover:text-foreground cursor-none">Terms of Use</a></li>
                         </ul>
                     </div>
                     <div>

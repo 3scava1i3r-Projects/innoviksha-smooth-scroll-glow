@@ -13,6 +13,9 @@ import CaseStudies from "./pages/CaseStudies";
 import ServicesPage from "./pages/ServicesPage";
 import ContactUs from "./pages/ContactUs";
 import Testimonials from "./pages/Testimonials";
+import TermsOfUse from "./pages/TermsOfUse";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+
 
 const queryClient = new QueryClient();
 
@@ -31,6 +34,8 @@ const App = () => (
               <Route path="/services" element={<ServicesPage />} />
               <Route path="/testimonials" element={<Testimonials />} />
               <Route path="/contact-us" element={<ContactUs />} />
+              <Route path="/terms-of-use" element={<TermsOfUse />} />
+              {/* <Route path="/privacy-policy" element={<PrivacyPolicy />} /> Soon */}
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>

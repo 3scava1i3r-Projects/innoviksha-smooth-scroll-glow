@@ -8,7 +8,7 @@ const navItems = [
   { title: "Case Studies", href: "/case-studies" },
   { title: "Services", href: "/services" },
   { title: "Testimonials", href: "/testimonials" },
-  { title: "Contact Us", href: "/contact-us" },
+  // { title: "Contact Us", href: "/contact-us" },
 ];
 
 const Header = () => {
@@ -46,7 +46,7 @@ const Header = () => {
                   </Link>
                 ))}
                 <Button asChild className="mt-4">
-                  <Link to="/contact-us">Contact us</Link>
+                  <Link to="https://cal.com/innoviksha">Schedule a Call</Link>
                 </Button>
               </nav>
             </SheetContent>
