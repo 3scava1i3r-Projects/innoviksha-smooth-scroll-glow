@@ -7,26 +7,70 @@ import {
 import { useCursor } from "@/contexts/CursorContext"
 import { motion } from "framer-motion";
 
+// const services = [
+//     {
+//         title: "Websites",
+//         description: "We build high-performing, beautiful websites that are fast, secure, and easy to manage. Our websites are designed to convert visitors into customers.",
+//         subServices: ["Strategy & Prototyping", "Web & Mobile Design", "Front-end Development", "CMS & E-commerce"],
+//     },
+//     {
+//         title: "Web Apps",
+//         description: "From complex enterprise platforms to user-friendly consumer apps, we build scalable and robust web applications that solve real-world problems.",
+//          subServices: ["Product Discovery", "UX/UI Design", "Full-stack Development", "API Integrations"],
+//     },
+//     {
+//         title: "Mobile Apps",
+//         description: "We design and develop native and cross-platform mobile apps for iOS and Android that deliver engaging experiences to your users.",
+//         subServices: ["iOS Development", "Android Development", "React Native", "Firebase Integration"],
+//     },
+//     {
+//         title: "AI Automation",
+//         description: "Leverage the power of AI to automate your business processes, improve efficiency, and drive growth. We build custom AI solutions tailored to your needs.",
+//         subServices: ["Process Analysis", "AI Model Integration", "Custom Chatbots", "Workflow Automation"],
+//     },
+// ];
+
 const services = [
     {
-        title: "Websites",
-        description: "We build high-performing, beautiful websites that are fast, secure, and easy to manage. Our websites are designed to convert visitors into customers.",
-        subServices: ["Strategy & Prototyping", "Web & Mobile Design", "Front-end Development", "CMS & E-commerce"],
+        title: "Custom Software Development",
+        description: "We design, build, and scale bespoke software solutions that power your business. From complex internal tools to customer-facing SaaS platforms, we deliver secure, scalable, and elegant code.",
+        subServices: [
+            "SaaS Platform Development",
+            "MVP & Product Prototyping",
+            "Internal Tooling & Dashboards",
+            "API Design & Integration"
+        ],
     },
     {
-        title: "Web Apps",
-        description: "From complex enterprise platforms to user-friendly consumer apps, we build scalable and robust web applications that solve real-world problems.",
-         subServices: ["Product Discovery", "UX/UI Design", "Full-stack Development", "API Integrations"],
+        title: "AI & Automation",
+        description: "We integrate intelligent automation into the core of your operations. By leveraging state-of-the-art AI models and custom workflows, we help you work smarter, faster, and more efficiently.",
+         subServices: [
+            "AI Agent Development",
+            "Business Process Automation",
+            "Custom AI Model Integration",
+            "AI-Powered Workflow Design"
+        ],
     },
     {
-        title: "Mobile Apps",
-        description: "We design and develop native and cross-platform mobile apps for iOS and Android that deliver engaging experiences to your users.",
-        subServices: ["iOS Development", "Android Development", "React Native", "Firebase Integration"],
+        title: "Web & Mobile Applications",
+        description: "We create high-performance web and mobile applications that provide intuitive, engaging user experiences. Our apps are built for performance, security, and growth on any device.",
+        subServices: [
+            "Progressive Web Apps (PWAs)",
+            "Cross-Platform Mobile Apps",
+            "Interactive User Interfaces",
+            "Real-time Data Applications"
+        ],
     },
+    // Optional fourth service, focused on existing systems
     {
-        title: "AI Automation",
-        description: "Leverage the power of AI to automate your business processes, improve efficiency, and drive growth. We build custom AI solutions tailored to your needs.",
-        subServices: ["Process Analysis", "AI Model Integration", "Custom Chatbots", "Workflow Automation"],
+        title: "System Modernization",
+        description: "We help you upgrade legacy systems and unlock new capabilities. We specialize in modernizing codebases, migrating to the cloud, and integrating AI into your existing infrastructure.",
+        subServices: [
+            "Legacy System Upgrades",
+            "Cloud Migration (AWS/GCP/Azure)",
+            "Performance Optimization",
+            "Adding AI to Existing Apps"
+        ],
     },
 ];
 

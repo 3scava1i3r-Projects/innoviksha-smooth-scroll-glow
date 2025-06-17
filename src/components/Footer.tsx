@@ -26,10 +26,10 @@ const Footer = () => {
                     <div>
                         <h3 className="font-bold text-lg">Services</h3>
                         <ul className="mt-4 space-y-2 text-muted-foreground text-xs">
-                            <li><a href="#" className="hover:text-foreground cursor-none">Websites</a></li>
-                            <li><a href="#" className="hover:text-foreground cursor-none">Web Apps</a></li>
-                            <li><a href="#" className="hover:text-foreground cursor-none">Mobile Apps</a></li>
-                            <li><a href="#" className="hover:text-foreground cursor-none">AI Automation</a></li>
+                            <li><a href="#" className="hover:text-foreground cursor-none">Custom Software Development</a></li>
+                            <li><a href="#" className="hover:text-foreground cursor-none">AI & Automation</a></li>
+                            <li><a href="#" className="hover:text-foreground cursor-none">Web & Mobile Applications</a></li>
+                            <li><a href="#" className="hover:text-foreground cursor-none">System Modernization</a></li>
                         </ul>
                     </div>
                     <div>
@@ -41,7 +41,7 @@ const Footer = () => {
                     </div>
                     <div>
                         <h3 className="font-bold text-lg">Innoviksha</h3>
-                        <p className="text-muted-foreground mt-4 text-sm">World-Class Digital Products.</p>
+                        <p className="text-muted-foreground mt-4 text-sm">Building elegant software and intelligent automation for growing businesses.</p>
                         <div className="flex gap-4 mt-4">
                             <a href="#" className="text-muted-foreground hover:text-foreground cursor-none"><Instagram size={20}/></a>
                             <a href="#" className="text-muted-foreground hover:text-foreground cursor-none"><Dribbble size={20}/></a>
@@ -53,9 +53,9 @@ const Footer = () => {
                 <div className="mt-16 pt-8 border-t border-border/50 text-sm text-muted-foreground flex justify-between items-center">
                     <p>&copy; {new Date().getFullYear()} Innoviksha. All rights reserved.</p>
                     <div className="flex gap-4 font-semibold">
-                        <span className="cursor-none">Awwwards</span>
+                        {/* <span className="cursor-none">Awwwards</span>
                         <span className="cursor-none">Clutch</span>
-                        <span className="cursor-none">FWA</span>
+                        <span className="cursor-none">FWA</span> */}
                     </div>
                 </div>
             </div>
