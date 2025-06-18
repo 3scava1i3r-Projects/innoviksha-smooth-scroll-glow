@@ -12,12 +12,12 @@ const works = [
   {
     title: "Custom CRM System for Sales and Team Management",
     category: "Business Automation",
-    imgSrc: "https://www.lummi.ai/api/render/image/509439c1-da79-4fc0-9448-3eae4729336c?token=eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjUwOTQzOWMxLWRhNzktNGZjMC05NDQ4LTNlYWU0NzI5MzM2YyIsImRvd25sb2FkU2l6ZSI6Im1lZGl1bSIsInJlbmRlclNwZWNzIjp7ImVmZmVjdHMiOnsicmVmcmFtZSI6e319fSwic2hvdWxkQXV0b0Rvd25sb2FkIjpmYWxzZSwianRpIjoibEF6ajcxc1hRSUZxOHJqbzJ1R3RFIiwiaWF0IjoxNzUwMjQ4MDE4LCJleHAiOjE3NTAyNDgwNzh9.3oGKwqnEN3T4YUSlBu3Pnp8t706Mw2i4sBlmGJ9CHmM",
+    imgSrc: "https://images.pexels.com/photos/7869320/pexels-photo-7869320.jpeg",
   },
   {
     title: "AI-Powered Chatbot for 24/7 Customer Support",
     category: "AI Integration",
-    imgSrc: "https://www.lummi.ai/api/render/image/925ce574-2c11-44b4-88c4-408e12e30fdb?token=eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjkyNWNlNTc0LTJjMTEtNDRiNC04OGM0LTQwOGUxMmUzMGZkYiIsImRvd25sb2FkU2l6ZSI6Im1lZGl1bSIsInJlbmRlclNwZWNzIjp7ImVmZmVjdHMiOnsicmVmcmFtZSI6e319fSwic2hvdWxkQXV0b0Rvd25sb2FkIjpmYWxzZSwianRpIjoiTkxka2NsSEpyaHp2SGpJUTRJTktZIiwiaWF0IjoxNzUwMjQ4MTAwLCJleHAiOjE3NTAyNDgxNjB9.3UzKYSnOLNneJJs479dcxbCzIgN3j05XtFCu2wV4n6U",
+    imgSrc: "https://www.shutterstock.com/image-photo/person-use-customer-service-support-600nw-2267815663.jpg",
   },
   {
     title: "Conversational AI Voice Assistant for Call Center Automation",
@@ -47,7 +47,7 @@ const works = [
   {
     title: "Inventory & Sales Tracker for Small and Medium Farms",
     category: "AgriTech Software",
-    imgSrc: "https://images.unsplash.com/photo-1580741753550-14b6b43c4ef0?q=80&w=2070&auto=format&fit=crop",
+    imgSrc: "https://img.freepik.com/free-photo/farmer-with-tablet-close-up_23-2148579698.jpg?ga=GA1.1.183046129.1750250706&semt=ais_hybrid&w=740",
   },
   {
     title: "Intelligent Document Processing Engine for Legal, HR, and Real Estate",
@@ -57,29 +57,29 @@ const works = [
   {
     title: "Private Label Product & Review Tracker for Amazon FBA Sellers",
     category: "E-commerce Tools",
-    imgSrc: "https://images.unsplash.com/photo-1549921296-3a4d95b2d95b?q=80&w=2070&auto=format&fit=crop",
+    imgSrc: "https://img.freepik.com/free-photo/medium-shot-woman-with-tablet_23-2148902535.jpg?ga=GA1.1.183046129.1750250706&semt=ais_hybrid&w=740",
   },
   {
     title: "End-to-End Job Management Platform for Local Service Providers",
     category: "Field Services Software",
-    imgSrc: "https://images.unsplash.com/photo-1605902711944-99c84f1e8f79?q=80&w=2070&auto=format&fit=crop",
+    imgSrc: "https://images.unsplash.com/photo-1565688527174-775059ac429c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
     title: "E-commerce platform for a fashion brand",
     category: "Web Design",
     imgSrc: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1999&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
-  {
-    title: "Enhanced electric scooter experience",
-    category: "Mobile App",
-    imgSrc: "https://images.unsplash.com/photo-1558981403-c5f9899a28bc?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  },
+  // {
+  //   title: "Enhanced electric scooter experience",
+  //   category: "Mobile App",
+  //   imgSrc: "https://images.unsplash.com/photo-1558981403-c5f9899a28bc?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  // },
   {
     title: "Lightweight and easy-to-use website for a cybersecurity startup",
     category: "Web Design",
     imgSrc: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
-    {
+  {
     title: "Unique website with a beautiful presentation of sustainably-oriented toolbox",
     category: "Branding",
     imgSrc: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
