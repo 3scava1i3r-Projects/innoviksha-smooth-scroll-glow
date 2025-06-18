@@ -10,16 +10,6 @@ import Footer from "@/components/Footer";
 
 const works = [
   {
-    title: "Custom CRM System for Sales and Team Management",
-    category: "Business Automation",
-    imgSrc: "https://images.pexels.com/photos/7869320/pexels-photo-7869320.jpeg",
-  },
-  {
-    title: "AI-Powered Chatbot for 24/7 Customer Support",
-    category: "AI Integration",
-    imgSrc: "https://www.shutterstock.com/image-photo/person-use-customer-service-support-600nw-2267815663.jpg",
-  },
-  {
     title: "Conversational AI Voice Assistant for Call Center Automation",
     category: "Voice AI",
     imgSrc: "https://images.unsplash.com/photo-1573167101669-476636b96cea?q=80&w=2070&auto=format&fit=crop",
@@ -77,12 +67,22 @@ const works = [
   {
     title: "Lightweight and easy-to-use website for a cybersecurity startup",
     category: "Web Design",
-    imgSrc: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    imgSrc: "https://images.unsplash.com/photo-1629904853716-f0bc54eea481?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
   {
     title: "Unique website with a beautiful presentation of sustainably-oriented toolbox",
     category: "Branding",
     imgSrc: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  },
+  {
+    title: "Custom CRM System for Sales and Team Management",
+    category: "Business Automation",
+    imgSrc: "https://images.pexels.com/photos/7869320/pexels-photo-7869320.jpeg",
+  },
+  {
+    title: "AI-Powered Chatbot for 24/7 Customer Support",
+    category: "AI Integration",
+    imgSrc: "https://www.shutterstock.com/image-photo/person-use-customer-service-support-600nw-2267815663.jpg",
   },
 ];
 
