@@ -3,6 +3,7 @@ import { useCursor } from "@/contexts/CursorContext";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import { Link } from 'react-router-dom';
 
 const projects = [
   {
@@ -73,9 +74,12 @@ const Projects = () => {
                 </div>
 
                 <div className="mt-20 text-center">
+                      <Link to="/works">
+
                     <Button variant="outline" size="lg">
                         See more work <ArrowRight className="ml-2 h-4 w-4" />
                     </Button>
+                    </Link>
                 </div>
             </div>
         </section>
