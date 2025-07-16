@@ -149,6 +149,20 @@ const CustomCursor: React.FC = () => {
   const size = cursorType === 'hover' ? 64 : 16;
   const bg = cursorType === 'hover' ? '#fff' : 'hsl(var(--primary))';
 
+
+    const styles =
+    cursorType === 'hover'
+      ? {
+          backgroundColor: 'rgba(156, 163, 175, 0.2)', // light gray with transparency
+          border: '2px solid #9CA3AF',
+          backdropFilter: 'blur(6px)',
+        }
+      : {
+          backgroundColor: '#9CA3AF', // solid gray
+          border: 'none',
+          backdropFilter: 'none',
+        };
+
   return (
     <div
       ref={cursorRef}
@@ -161,6 +175,8 @@ const CustomCursor: React.FC = () => {
         backgroundColor: bg,
         mixBlendMode: 'difference',
         willChange: 'transform',
+        ...styles,
+
       }}
     />
   );
