@@ -11,10 +11,15 @@ const projects = [
     category: "Web Design",
     imgSrc: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1999&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   },
+//   {
+//     title: "Enhanced electric scooter experience",
+//     category: "Mobile App",
+//     imgSrc: "https://images.unsplash.com/photo-1558981403-c5f9899a28bc?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+//   },
   {
-    title: "Enhanced electric scooter experience",
-    category: "Mobile App",
-    imgSrc: "https://images.unsplash.com/photo-1558981403-c5f9899a28bc?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    title: "AI-Based Personalized Fitness Plan Generator",
+    category: "Health & Wellness Tech",
+    imgSrc: "https://images.unsplash.com/photo-1605296867304-46d5465a13f1?q=80&w=2070&auto=format&fit=crop",
   },
   {
     title: "Lightweight and easy-to-use website for a cybersecurity startup",
