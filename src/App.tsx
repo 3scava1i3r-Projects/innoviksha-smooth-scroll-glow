@@ -16,6 +16,7 @@ import Testimonials from "./pages/Testimonials";
 import TermsOfUse from "./pages/TermsOfUse";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import Works from "./pages/Works";
+// import ScrollToTop from "./components/ScrolltoTop";
 
 const queryClient = new QueryClient();
 
@@ -28,6 +29,7 @@ const App = () => (
         <CustomCursor />
         <ReactLenis root>
           <BrowserRouter>
+            
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/case-studies" element={<CaseStudies />} />
