@@ -1,38 +1,51 @@
-// // // src/components/ScrollToTop.tsx
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
-// // import { useEffect } from 'react';
-// // import { useLocation } from 'react-router-dom';
+declare global {
+  interface Window {
+    lenis?: {
+      scrollTo: (target: number, options?: any) => void;
+      stop: () => void;
+      start: () => void;
+    };
+  }
+}
 
-// // export default function ScrollToTop() {
-// //   const { pathname } = useLocation();
+export const ScrollToTop = () => {
+  const location = useLocation();
 
-// //   useEffect(() => {
-// //     // This condition checks if the component is running in a browser environment
-// //     // before trying to access `window`. This prevents errors during server-side rendering.
-// //     if (typeof window !== 'undefined') {
-// //       window.scrollTo(0, 0);
-// //     }
-// //   }, [pathname]); // The effect runs every time the route changes
+  useEffect(() => {
+    const scrollToTop = () => {
+      // Method 1: Use ReactLenis instance if available
+      if (window.lenis) {
+        window.lenis.scrollTo(0, { immediate: true });
+      }
+      
+      // Method 2: Force immediate scroll with all possible methods
+      window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+      
+      // Method 3: Handle any custom scroll containers
+      const scrollContainers = document.querySelectorAll('[data-lenis], .scroll-container');
+      scrollContainers.forEach(container => {
+        if (container instanceof HTMLElement) {
+          container.scrollTop = 0;
+        }
+      });
+    };
 
-// //   return null; // This component renders nothing.
-// // }
+    // Execute immediately and multiple times to override ReactLenis
+    scrollToTop();
+    setTimeout(scrollToTop, 1);
+    setTimeout(scrollToTop, 10);
+    setTimeout(scrollToTop, 50);
+    
+    // Also use requestAnimationFrame for next frame
+    requestAnimationFrame(scrollToTop);
+  }, [location.pathname]);
 
-// // components/ScrollToTop.tsx
-// "use client";
+  return null;
+};
 
-// import { useEffect } from "react";
-// import { useLocation } from "react-router-dom";
-
-// export const ScrollToTop = () => {
-//   const location = useLocation();
-
-//   useEffect(() => {
-//     window.scrollTo({
-//       top: 0,
-//       left: 0,
-//       behavior: "smooth", // You can change to "auto" for instant scroll
-//     });
-//   }, [location.pathname]); // Only run effect when the route changes
-
-//   return null;
-// };
+export default ScrollToTop;
