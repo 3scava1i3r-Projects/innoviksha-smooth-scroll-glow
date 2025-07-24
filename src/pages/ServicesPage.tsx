@@ -5,10 +5,10 @@ import Services from "@/components/Services";
 
 const ServicesPage = () => {
   return (
-    <div className="bg-background">
+    <div className="bg-white">
       <Header />
       <main>
-        <Services />
+        <Services variant="light" />
       </main>
       <Footer />
     </div>

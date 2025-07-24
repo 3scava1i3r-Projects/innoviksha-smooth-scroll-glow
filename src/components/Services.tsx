@@ -258,6 +258,7 @@ import {
 } from "@/components/ui/accordion"
 import { useCursor } from "@/contexts/CursorContext"
 import { motion } from "framer-motion";
+import { cn } from "@/lib/utils";
 
 const services = [
     {
@@ -302,11 +303,24 @@ const services = [
     },
 ];
 
-const Services = () => {
+interface ServicesProps {
+  variant?: "dark" | "light";
+}
+
+const Services = ({ variant = "dark" }: ServicesProps) => {
     const { setCursorType } = useCursor();
+    
+    const sectionClasses = cn(
+        "py-40",
+        {
+            "dark bg-background text-foreground": variant === "dark",
+            "bg-white text-black": variant === "light",
+        }
+    );
+
     return (
         <section 
-            className="dark bg-background text-foreground py-40"
+            className={sectionClasses}
             onMouseEnter={() => setCursorType('default')}
             onMouseLeave={() => setCursorType('default')}
         >
