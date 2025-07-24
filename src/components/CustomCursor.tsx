@@ -126,20 +126,23 @@ const CustomCursor: React.FC = () => {
     let rafId: number;
 
     const updatePosition = (e: MouseEvent) => {
+      // Account for device pixel ratio (Retina displays)
+      const rect = document.documentElement.getBoundingClientRect();
       x = e.clientX;
       y = e.clientY;
 
       if (!rafId) {
         rafId = requestAnimationFrame(() => {
           if (cursorRef.current) {
-            cursorRef.current.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+            // Use translate instead of translate3d for better Mac compatibility
+            cursorRef.current.style.transform = `translate(${x}px, ${y}px)`;
           }
           rafId = 0;
         });
       }
     };
 
-    window.addEventListener('mousemove', updatePosition);
+    window.addEventListener('mousemove', updatePosition, { passive: true });
     return () => {
       window.removeEventListener('mousemove', updatePosition);
       cancelAnimationFrame(rafId);
@@ -149,34 +152,50 @@ const CustomCursor: React.FC = () => {
   const size = cursorType === 'hover' ? 64 : 16;
   const bg = cursorType === 'hover' ? '#fff' : 'hsl(var(--primary))';
 
+  // Check if running on Mac (different GPU handling)
+  const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
 
-    const styles =
-    cursorType === 'hover'
-      ? {
-          backgroundColor: 'rgba(156, 163, 175, 0.2)', // light gray with transparency
-          border: '2px solid #9CA3AF',
-          backdropFilter: 'blur(6px)',
-        }
-      : {
-          backgroundColor: '#9CA3AF', // solid gray
-          border: 'none',
-          backdropFilter: 'none',
-        };
+  const styles = cursorType === 'hover'
+    ? {
+        backgroundColor: 'rgba(156, 163, 175, 0.2)',
+        border: '2px solid #9CA3AF',
+        backdropFilter: 'blur(6px)',
+        WebkitBackdropFilter: 'blur(6px)', // Safari/Mac support
+        // Mac fallback: stronger border when mix-blend-mode is disabled
+        ...(isMac && {
+          backgroundColor: 'rgba(156, 163, 175, 0.15)',
+          border: '3px solid #9CA3AF',
+          boxShadow: 'inset 0 0 20px rgba(156, 163, 175, 0.3)',
+        })
+      }
+    : {
+        backgroundColor: '#9CA3AF',
+        border: 'none',
+        backdropFilter: 'none',
+        // Mac fallback: add subtle glow effect
+        ...(isMac && {
+          boxShadow: '0 0 10px rgba(156, 163, 175, 0.5)',
+        })
+      };
 
   return (
     <div
       ref={cursorRef}
-      className="fixed top-0 left-0 pointer-events-none z-50 rounded-full transition-[width,height,background-color] duration-150 ease-out"
+      className="fixed top-0 left-0 pointer-events-none z-50 rounded-full transition-[width,height,background-color,border,box-shadow] duration-150 ease-out"
       style={{
         width: size,
         height: size,
         marginLeft: -size / 2,
         marginTop: -size / 2,
         backgroundColor: bg,
-        mixBlendMode: 'difference',
+        mixBlendMode: isMac ? 'normal' : 'difference',
         willChange: 'transform',
+        transform: 'translateZ(0)',
+        // Enhanced Mac compatibility
+        WebkitTransform: 'translateZ(0)',
+        backfaceVisibility: 'hidden',
+        WebkitBackfaceVisibility: 'hidden',
         ...styles,
-
       }}
     />
   );
