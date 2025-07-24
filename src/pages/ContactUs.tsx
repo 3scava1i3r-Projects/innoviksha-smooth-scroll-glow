@@ -296,13 +296,13 @@ const ContactUs = () => {
     const form = e.currentTarget;
     const formData = new FormData(form);
 
+    const encodedData = new URLSearchParams(formData as any).toString();
+
     try {
       const response = await fetch("/", {
         method: "POST",
-        body: formData,
-        headers: {
-          Accept: "application/x-www-form-urlencoded",
-        },
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: encodedData,
       });
 
       if (response.ok) {

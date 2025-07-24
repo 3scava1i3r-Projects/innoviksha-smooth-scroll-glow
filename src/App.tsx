@@ -16,7 +16,7 @@ import Testimonials from "./pages/Testimonials";
 import TermsOfUse from "./pages/TermsOfUse";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import Works from "./pages/Works";
-import ScrollToTop from "./components/ScrolltoTop";
+import ScrollToTop from "./components/ScrollToTop";
 
 const queryClient = new QueryClient();
 
