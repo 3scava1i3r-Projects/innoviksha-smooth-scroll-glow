@@ -119,6 +119,9 @@ import { useCursor } from '../contexts/CursorContext';
 const CustomCursor: React.FC = () => {
   const cursorRef = useRef<HTMLDivElement>(null);
   const { cursorType } = useCursor();
+  
+  // Check if running on Mac (different GPU handling)
+  const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
 
   useEffect(() => {
     let x = -100;
@@ -126,34 +129,38 @@ const CustomCursor: React.FC = () => {
     let rafId: number;
 
     const updatePosition = (e: MouseEvent) => {
-      // Account for device pixel ratio (Retina displays)
-      const rect = document.documentElement.getBoundingClientRect();
-      x = e.clientX;
-      y = e.clientY;
+      // Mac Chrome specific: account for device pixel ratio and viewport scaling
+      const devicePixelRatio = window.devicePixelRatio || 1;
+      const isMacChrome = isMac && navigator.userAgent.includes('Chrome');
+      
+      x = isMacChrome ? e.clientX / devicePixelRatio * devicePixelRatio : e.clientX;
+      y = isMacChrome ? e.clientY / devicePixelRatio * devicePixelRatio : e.clientY;
 
       if (!rafId) {
         rafId = requestAnimationFrame(() => {
           if (cursorRef.current) {
-            // Use translate instead of translate3d for better Mac compatibility
-            cursorRef.current.style.transform = `translate(${x}px, ${y}px)`;
+            cursorRef.current.style.transform = `translate3d(${x}px, ${y}px, 0)`;
           }
           rafId = 0;
         });
       }
     };
 
+    // Force cursor hiding on Mac Chrome
+    if (isMac) {
+      document.body.style.cursor = 'none';
+      document.documentElement.style.cursor = 'none';
+    }
+
     window.addEventListener('mousemove', updatePosition, { passive: true });
     return () => {
       window.removeEventListener('mousemove', updatePosition);
-      cancelAnimationFrame(rafId);
+      if (rafId) cancelAnimationFrame(rafId);
     };
   }, []);
 
   const size = cursorType === 'hover' ? 64 : 16;
   const bg = cursorType === 'hover' ? '#fff' : 'hsl(var(--primary))';
-
-  // Check if running on Mac (different GPU handling)
-  const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
 
   const styles = cursorType === 'hover'
     ? {

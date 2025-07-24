@@ -93,6 +93,17 @@
     @apply bg-background text-foreground font-sans;
     cursor: none;
   }
+  
+  /* Mac Chrome fix - force cursor hiding with additional properties */
+  @media screen and (-webkit-min-device-pixel-ratio: 1.5) {
+    body {
+      cursor: none !important;
+      -webkit-cursor: none !important;
+    }
+    * {
+      cursor: none !important;
+    }
+  }
   section {
     @apply w-full py-20 md:py-32;
   }
