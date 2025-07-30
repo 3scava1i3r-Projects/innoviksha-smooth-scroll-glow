@@ -140,7 +140,7 @@ const Footer = () => {
                     </div>
                 </div>
                 <div className="mt-16 pt-8 border-t border-border/50 text-sm text-muted-foreground flex justify-between items-center">
-                    <p>© {new Date().getFullYear()} Innoviksha. All rights reserved.</p>
+                    <p>© {new Date().getFullYear()} InnoV. All rights reserved. InnoV is a brand of Innoviksha</p>
                     <div className="flex gap-4 font-semibold">
                         {/* <span className="cursor-none">Awwwards</span>
                         <span className="cursor-none">Clutch</span>

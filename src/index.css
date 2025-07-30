@@ -24,6 +24,20 @@
     transform: scaleX(1);
     transform-origin: bottom left;
   }
+
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
 }
 
 @layer base {
@@ -88,20 +102,36 @@
   }
   html {
     scroll-behavior: smooth;
+    scrollbar-gutter: stable;
   }
-  body {
-    @apply bg-background text-foreground font-sans;
-    cursor: none;
+  /* Hide cursor on desktop devices only */
+  @media (pointer: fine) {
+    body {
+      @apply bg-background text-foreground font-sans;
+      cursor: none;
+    }
   }
   
-  /* Mac Chrome fix - force cursor hiding with additional properties */
-  @media screen and (-webkit-min-device-pixel-ratio: 1.5) {
+  /* Show default cursor on mobile/touch devices */
+  @media (pointer: coarse) {
+    body {
+      @apply bg-background text-foreground font-sans;
+      cursor: auto !important;
+    }
+    
+    /* Hide custom cursor on mobile - use data attribute for targeting */
+    [data-custom-cursor] {
+      display: none !important;
+      visibility: hidden !important;
+      opacity: 0 !important;
+    }
+  }
+  
+  /* Mac Chrome fix - force cursor hiding with additional properties (desktop only) */
+  @media screen and (-webkit-min-device-pixel-ratio: 1.5) and (pointer: fine) {
     body {
       cursor: none !important;
       -webkit-cursor: none !important;
-    }
-    * {
-      cursor: none !important;
     }
   }
   section {

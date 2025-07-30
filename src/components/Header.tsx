@@ -61,26 +61,83 @@
 
 
 import { Button } from "@/components/ui/button";
-import { Menu } from "lucide-react";
+import { Menu, ChevronDownIcon } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuPortal } from "@/components/ui/dropdown-menu";
 import { Link } from "react-router-dom";
 
-// No changes needed here
+// Navigation items
 const navItems = [
-  // { title: "Case Studies", href: "/case-studies" },
-  { title: "Our Work", href: "/works" },
   { title: "Services", href: "/services" },
+  { title: "Blog", href: "/blog" },
   { title: "Testimonials", href: "/testimonials" }, // This will be handled in the JSX
+];
+
+// Studio items for dropdown
+const studioItems = [
+  { title: "Yin Studio", href: "/studio/yin", description: "Infrastructure & Systems" },
+  { title: "Yang Studio", href: "/studio/yang", description: "AI & Automation" },
+  { title: "Navasora Studio", href: "/studio/navasora", description: "UX & Digital Experience" },
+];
+
+// Free tools items for dropdown
+const freeToolsItems = [
+  { title: "URL Shortener", href: "/url-shortener" },
+  { title: "Website Analyzer", href: "/website-analyzer" },
 ];
 
 const Header = () => {
   return (
     <header className="fixed top-0 left-0 right-0 z-40 bg-background/80 backdrop-blur-sm">
       <div className="container mx-auto flex h-20 items-center justify-between">
-        <Link to="/" className="text-lg font-bold text-foreground">Innoviksha</Link>
+        <Link to="/" className="text-lg font-bold text-foreground">InnoV</Link>
         
         {/* --- Desktop Navigation --- */}
         <nav className="hidden md:flex items-center gap-6">
+          {/* Our Work Dropdown */}
+          <DropdownMenu>
+            <DropdownMenuTrigger className="flex items-center gap-1 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors animated-underline cursor-none">
+              Our Work
+              <ChevronDownIcon className="w-4 h-4" />
+            </DropdownMenuTrigger>
+            <DropdownMenuPortal>
+              <DropdownMenuContent className="w-64">
+                {studioItems.map((studio) => (
+                  <DropdownMenuItem key={studio.title} asChild>
+                    <Link 
+                      to={studio.href}
+                      className="cursor-none"
+                    >
+                      {studio.title}
+                    </Link>
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenuPortal>
+          </DropdownMenu>
+
+          {/* Free Tools Dropdown */}
+          <DropdownMenu>
+            <DropdownMenuTrigger className="flex items-center gap-1 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors animated-underline cursor-none">
+              Free Tools
+              <ChevronDownIcon className="w-4 h-4" />
+            </DropdownMenuTrigger>
+            <DropdownMenuPortal>
+              <DropdownMenuContent className="w-64">
+                {freeToolsItems.map((tool) => (
+                  <DropdownMenuItem key={tool.title} asChild>
+                    <Link 
+                      to={tool.href}
+                      className="cursor-none"
+                    >
+                      {tool.title}
+                    </Link>
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenuPortal>
+          </DropdownMenu>
+
           {navItems.map((item) => {
             // Check if the current item is "Testimonials"
             const isComingSoon = item.title === "Testimonials";
@@ -123,6 +180,38 @@ const Header = () => {
             </SheetTrigger>
             <SheetContent side="right">
               <nav className="flex flex-col gap-6 mt-16 items-center">
+                {/* Our Work Section - Mobile */}
+                <div className="flex flex-col items-center gap-3">
+                  <span className="text-lg font-medium text-foreground">Our Work</span>
+                  <div className="flex flex-col gap-2 items-center">
+                    {studioItems.map((studio) => (
+                      <Link
+                        key={studio.title}
+                        to={studio.href}
+                        className="text-base font-medium text-muted-foreground hover:text-foreground transition-colors cursor-none text-center"
+                      >
+                        {studio.title}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Free Tools Section - Mobile */}
+                <div className="flex flex-col items-center gap-3">
+                  <span className="text-lg font-medium text-foreground">Free Tools</span>
+                  <div className="flex flex-col gap-2 items-center">
+                    {freeToolsItems.map((tool) => (
+                      <Link
+                        key={tool.title}
+                        to={tool.href}
+                        className="text-base font-medium text-muted-foreground hover:text-foreground transition-colors cursor-none text-center"
+                      >
+                        {tool.title}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+
                 {navItems.map((item) => {
                   const isComingSoon = item.title === "Testimonials";
 

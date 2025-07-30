@@ -16,6 +16,12 @@ import Testimonials from "./pages/Testimonials";
 import TermsOfUse from "./pages/TermsOfUse";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import Works from "./pages/Works";
+import BlogPage from "./pages/BlogPage";
+import YinStudio from "./pages/YinStudio";
+import YangStudio from "./pages/YangStudio";
+import NavasoreStudio from "./pages/NavasoraStudio";
+import URLShortener from "./pages/URLShortener";
+import WebsiteAnalyzer from "./pages/WebsiteAnalyzer";
 import ScrollToTop from "./components/ScrollToTop";
 
 const queryClient = new QueryClient();
@@ -38,6 +44,12 @@ const App = () => (
               <Route path="/contact-us" element={<ContactUs />} />
               <Route path="/terms-of-use" element={<TermsOfUse />} />
               <Route path="/works" element={<Works />} />
+              <Route path="/blog" element={<BlogPage />} />
+              <Route path="/studio/yin" element={<YinStudio />} />
+              <Route path="/studio/yang" element={<YangStudio />} />
+              <Route path="/studio/navasora" element={<NavasoreStudio />} />
+              <Route path="/url-shortener" element={<URLShortener />} />
+              <Route path="/website-analyzer" element={<WebsiteAnalyzer />} />
 
               {/* <Route path="/privacy-policy" element={<PrivacyPolicy />} /> Soon */}
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
