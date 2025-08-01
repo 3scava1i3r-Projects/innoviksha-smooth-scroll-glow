@@ -1,9 +1,9 @@
 import ReactGA from 'react-ga4';
 
-const TRACKING_ID = "G-HT3T69HVMR"; // YOUR_OWN_TRACKING_ID
+const TRACKING_ID = import.meta.env.VITE_GA_TRACKING_ID;
 
 export const initGA = () => {
-  if (process.env.NODE_ENV === 'production') {
+  if (process.env.NODE_ENV === 'production' && TRACKING_ID) {
     ReactGA.initialize(TRACKING_ID);
   }
 };
