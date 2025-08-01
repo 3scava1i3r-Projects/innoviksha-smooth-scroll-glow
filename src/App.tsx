@@ -23,8 +23,53 @@ import NavasoreStudio from "./pages/NavasoraStudio";
 import URLShortener from "./pages/URLShortener";
 import WebsiteAnalyzer from "./pages/WebsiteAnalyzer";
 import ScrollToTop from "./components/ScrollToTop";
+import CookieConsent from "./components/CookieConsent";
+import { initGA, trackPageView } from "./lib/gtag";
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 const queryClient = new QueryClient();
+
+const AppContent = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    const consent = localStorage.getItem('cookie-consent');
+    if (consent) {
+      initGA();
+    }
+  }, []);
+
+  useEffect(() => {
+    trackPageView(location.pathname + location.search);
+  }, [location]);
+
+  return (
+    <>
+      <ScrollToTop />
+      <CookieConsent onAccept={initGA} />
+      <Routes>
+        <Route path="/" element={<Index />} />
+        <Route path="/case-studies" element={<CaseStudies />} />
+        <Route path="/services" element={<ServicesPage />} />
+        <Route path="/testimonials" element={<Testimonials />} />
+        <Route path="/contact-us" element={<ContactUs />} />
+        <Route path="/terms-of-use" element={<TermsOfUse />} />
+        <Route path="/works" element={<Works />} />
+        <Route path="/blog" element={<BlogPage />} />
+        <Route path="/studio/yin" element={<YinStudio />} />
+        <Route path="/studio/yang" element={<YangStudio />} />
+        <Route path="/studio/navasora" element={<NavasoreStudio />} />
+        <Route path="/url-shortener" element={<URLShortener />} />
+        <Route path="/website-analyzer" element={<WebsiteAnalyzer />} />
+
+        {/* <Route path="/privacy-policy" element={<PrivacyPolicy />} /> Soon */}
+        {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </>
+  );
+};
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
@@ -35,26 +80,7 @@ const App = () => (
         <CustomCursor />
         <ReactLenis root>
           <BrowserRouter>
-            <ScrollToTop />
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/case-studies" element={<CaseStudies />} />
-              <Route path="/services" element={<ServicesPage />} />
-              <Route path="/testimonials" element={<Testimonials />} />
-              <Route path="/contact-us" element={<ContactUs />} />
-              <Route path="/terms-of-use" element={<TermsOfUse />} />
-              <Route path="/works" element={<Works />} />
-              <Route path="/blog" element={<BlogPage />} />
-              <Route path="/studio/yin" element={<YinStudio />} />
-              <Route path="/studio/yang" element={<YangStudio />} />
-              <Route path="/studio/navasora" element={<NavasoreStudio />} />
-              <Route path="/url-shortener" element={<URLShortener />} />
-              <Route path="/website-analyzer" element={<WebsiteAnalyzer />} />
-
-              {/* <Route path="/privacy-policy" element={<PrivacyPolicy />} /> Soon */}
-              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-              <Route path="*" element={<NotFound />} />
-            </Routes>
+            <AppContent />
           </BrowserRouter>
         </ReactLenis>
       </CursorProvider>

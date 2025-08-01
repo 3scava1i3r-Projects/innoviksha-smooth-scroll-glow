@@ -63,7 +63,7 @@
 import { Button } from "@/components/ui/button";
 import { Menu, ChevronDownIcon } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuPortal } from "@/components/ui/dropdown-menu";
+import { HoverCard, HoverCardTrigger, HoverCardContent } from "@/components/ui/hover-card";
 import { Link } from "react-router-dom";
 
 // Navigation items
@@ -95,48 +95,46 @@ const Header = () => {
         {/* --- Desktop Navigation --- */}
         <nav className="hidden md:flex items-center gap-6">
           {/* Our Work Dropdown */}
-          <DropdownMenu>
-            <DropdownMenuTrigger className="flex items-center gap-1 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors animated-underline cursor-none">
+          <HoverCard>
+            <HoverCardTrigger className="flex items-center gap-1 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors animated-underline cursor-none">
               Our Work
               <ChevronDownIcon className="w-4 h-4" />
-            </DropdownMenuTrigger>
-            <DropdownMenuPortal>
-              <DropdownMenuContent className="w-64">
+            </HoverCardTrigger>
+            <HoverCardContent className="w-64">
+              <div className="flex flex-col gap-2">
                 {studioItems.map((studio) => (
-                  <DropdownMenuItem key={studio.title} asChild>
-                    <Link 
-                      to={studio.href}
-                      className="cursor-none"
-                    >
-                      {studio.title}
-                    </Link>
-                  </DropdownMenuItem>
+                  <Link 
+                    key={studio.title}
+                    to={studio.href}
+                    className="cursor-none p-2 hover:bg-accent rounded-md"
+                  >
+                    {studio.title}
+                  </Link>
                 ))}
-              </DropdownMenuContent>
-            </DropdownMenuPortal>
-          </DropdownMenu>
+              </div>
+            </HoverCardContent>
+          </HoverCard>
 
           {/* Free Tools Dropdown */}
-          <DropdownMenu>
-            <DropdownMenuTrigger className="flex items-center gap-1 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors animated-underline cursor-none">
+          <HoverCard>
+            <HoverCardTrigger className="flex items-center gap-1 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors animated-underline cursor-none">
               Free Tools
               <ChevronDownIcon className="w-4 h-4" />
-            </DropdownMenuTrigger>
-            <DropdownMenuPortal>
-              <DropdownMenuContent className="w-64">
+            </HoverCardTrigger>
+            <HoverCardContent className="w-64">
+              <div className="flex flex-col gap-2">
                 {freeToolsItems.map((tool) => (
-                  <DropdownMenuItem key={tool.title} asChild>
-                    <Link 
-                      to={tool.href}
-                      className="cursor-none"
-                    >
-                      {tool.title}
-                    </Link>
-                  </DropdownMenuItem>
+                  <Link 
+                    key={tool.title}
+                    to={tool.href}
+                    className="cursor-none p-2 hover:bg-accent rounded-md"
+                  >
+                    {tool.title}
+                  </Link>
                 ))}
-              </DropdownMenuContent>
-            </DropdownMenuPortal>
-          </DropdownMenu>
+              </div>
+            </HoverCardContent>
+          </HoverCard>
 
           {navItems.map((item) => {
             // Check if the current item is "Testimonials"
