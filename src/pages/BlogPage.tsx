@@ -238,7 +238,7 @@ const BlogPage = () => {
           {/* Read More on Medium Card - Show when there's space or on last page */}
           {shouldShowReadMoreCard() && (
             <Card 
-              className="group hover:shadow-lg transition-all duration-300 cursor-none bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20"
+              className="group hover:shadow-lg transition-all duration-300 cursor-none bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20 grayscale group-hover:grayscale-0"
               onMouseEnter={() => setCursorType('hover')}
               onMouseLeave={() => setCursorType('default')}
             >
