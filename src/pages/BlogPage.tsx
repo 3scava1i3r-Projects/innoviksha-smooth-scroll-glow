@@ -47,19 +47,22 @@ const BlogPage = () => {
           throw new Error('RSS feed error');
         }
         
-        const formattedPosts: BlogPost[] = data.items.map((item: any) => ({
-          title: item.title,
-          link: item.link,
-          description: item.description.replace(/<[^>]*>/g, '').substring(0, 200) + '...',
-          pubDate: new Date(item.pubDate).toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-          }),
-          categories: item.categories || [],
-          thumbnail: item.thumbnail || item.enclosure?.link,
-          author: item.author || '3scava1i3r'
-        }));
+        const formattedPosts: BlogPost[] = data.items.map((item: any) => {
+          const thumbnailMatch = item.description.match(/<img[^>]+src="([^">]+)"/);
+          return {
+            title: item.title,
+            link: item.link,
+            description: item.description.replace(/<[^>]*>/g, '').substring(0, 200) + '...',
+            pubDate: new Date(item.pubDate).toLocaleDateString('en-US', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric'
+            }),
+            categories: item.categories || [],
+            thumbnail: thumbnailMatch ? thumbnailMatch[1] : (item.thumbnail || item.enclosure?.link),
+            author: item.author || '3scava1i3r'
+          };
+        });
         
         setPosts(formattedPosts);
       } catch (err) {
@@ -188,7 +191,7 @@ const BlogPage = () => {
                   <img 
                     src={post.thumbnail} 
                     alt={post.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 grayscale group-hover:grayscale-0"
                   />
                 </div>
               )}
