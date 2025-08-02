@@ -21,7 +21,7 @@ const CTA = () => {
                     <Button asChild size="lg">
                         <Link to="/contact-us">Contact us <ArrowRight className="ml-2 h-4 w-4" /></Link>
                     </Button>
-                    <Button size="lg" variant="outline"><Link to="cal.com/InnoV">Schedule a Call</Link></Button>
+                    <Button size="lg" variant="outline"><a href="cal.com/InnoV">Schedule a Call</a></Button>
                 </div>
             </div>
         </motion.section>

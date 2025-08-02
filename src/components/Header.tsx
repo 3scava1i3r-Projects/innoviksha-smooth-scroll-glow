@@ -233,7 +233,7 @@ const Header = () => {
                 })}
                 <Button asChild className="mt-4">
                   {/* It's good practice to use a more descriptive name like "Schedule a Discovery Call" */}
-                  <Link to="cal.com/InnoV">Schedule a Call</Link>
+                  <a href="cal.com/InnoV">Schedule a Call</>
                 </Button>
               </nav>
             </SheetContent>
