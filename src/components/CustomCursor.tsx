@@ -123,28 +123,6 @@ const CustomCursor: React.FC = () => {
   // Check if running on Mac (different GPU handling)
   const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
   
-  // Enhanced mobile detection
-  const isMobile = () => {
-    // Check user agent
-    const userAgent = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    
-    // Check touch capabilities
-    const hasTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-    
-    // Check screen size (as backup)
-    const isSmallScreen = window.innerWidth <= 768;
-    
-    // Check CSS media query
-    const isTouchDevice = window.matchMedia('(pointer: coarse)').matches;
-    
-    return userAgent || (hasTouch && isSmallScreen) || isTouchDevice;
-  };
-  
-  // Don't render cursor on mobile devices
-  if (isMobile()) {
-    return null;
-  }
-
   useEffect(() => {
     let x = -100;
     let y = -100;
@@ -211,7 +189,7 @@ const CustomCursor: React.FC = () => {
     <div
       ref={cursorRef}
       data-custom-cursor
-      className="fixed top-0 left-0 pointer-events-none z-50 rounded-full transition-[width,height,background-color,border,box-shadow] duration-150 ease-out"
+      className="fixed top-0 left-0 pointer-events-none z-[9999] rounded-full transition-[width,height,background-color,border,box-shadow] duration-150 ease-out"
       style={{
         width: size,
         height: size,
