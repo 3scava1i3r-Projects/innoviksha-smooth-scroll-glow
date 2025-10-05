@@ -71,6 +71,7 @@ const navItems = [
   { title: "Services", href: "/services" },
   { title: "Blog", href: "/blog" },
   { title: "Testimonials", href: "/testimonials" }, // This will be handled in the JSX
+  { title: "Case Studies", href: "/case-studies" },
 ];
 
 // Studio items for dropdown

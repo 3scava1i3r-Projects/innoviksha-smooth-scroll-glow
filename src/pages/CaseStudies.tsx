@@ -1,10 +1,8 @@
-
+import { useEffect, useRef, useState } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { ArrowRight, ExternalLink } from "lucide-react";
-import { motion } from "framer-motion";
+import * as THREE from "three";
+import gsap from "gsap";
 
 const caseStudies = [
   {
@@ -12,176 +10,456 @@ const caseStudies = [
     title: "E-commerce Platform Redesign",
     client: "Fashion Forward",
     category: "Web Design & Development",
-    description: "Complete redesign of an e-commerce platform that increased conversion rates by 45% and improved user engagement.",
     image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1999&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    results: ["45% increase in conversion rate", "60% reduction in bounce rate", "3x faster page load times"],
-    tags: ["React", "Node.js", "MongoDB", "Stripe API"]
   },
   {
     id: 2,
     title: "Mobile Banking App",
     client: "SecureBank",
     category: "Mobile App Development",
-    description: "Revolutionary mobile banking app with advanced security features and intuitive user experience.",
     image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    results: ["1M+ downloads in first month", "4.8/5 app store rating", "50% increase in digital transactions"],
-    tags: ["React Native", "Biometric Auth", "Real-time Analytics", "Cloud Security"]
   },
   {
     id: 3,
     title: "Healthcare Management System",
     client: "MediCare Solutions",
     category: "Web Application",
-    description: "Comprehensive healthcare management system streamlining patient care and administrative processes.",
     image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    results: ["40% reduction in admin time", "99.9% system uptime", "HIPAA compliant"],
-    tags: ["Vue.js", "Python", "PostgreSQL", "AWS"]
   },
   {
     id: 4,
     title: "AI-Powered Analytics Dashboard",
     client: "DataTech Corp",
     category: "Data Visualization",
-    description: "Advanced analytics dashboard with AI-powered insights for better business decision making.",
     image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    results: ["35% faster decision making", "Real-time data processing", "Custom ML models"],
-    tags: ["D3.js", "TensorFlow", "GraphQL", "Docker"]
   },
   {
     id: 5,
     title: "Social Learning Platform",
     client: "EduConnect",
     category: "EdTech Platform",
-    description: "Interactive learning platform connecting students and educators worldwide with gamification features.",
     image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    results: ["100K+ active users", "85% course completion rate", "Available in 12 languages"],
-    tags: ["React", "Firebase", "WebRTC", "PWA"]
   },
   {
     id: 6,
     title: "Smart Home IoT Dashboard",
     client: "HomeAutomation Pro",
     category: "IoT Application",
-    description: "Comprehensive IoT dashboard for smart home management with real-time monitoring and control.",
     image: "https://images.unsplash.com/photo-1558036117-15d82a90b9b1?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    results: ["30% energy savings", "24/7 monitoring", "Voice control integration"],
-    tags: ["Angular", "MQTT", "InfluxDB", "Raspberry Pi"]
   }
 ];
 
-const CaseStudies = () => {
-  return (
-    <div className="bg-background">
-      <Header />
-      <main>
-        {/* Hero Section */}
-        <section className="py-12 md:py-20">
-          <div className="container mx-auto text-center px-4">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              <p className="text-sm font-semibold uppercase text-primary tracking-widest">Our Work</p>
-              <h1 className="text-3xl md:text-5xl font-bold mt-4 leading-tight">Case Studies</h1>
-              <p className="text-muted-foreground mt-4 text-lg max-w-2xl mx-auto">
-                Discover how we've helped businesses transform their digital presence and achieve remarkable results.
-              </p>
-            </motion.div>
-          </div>
-        </section>
+const vertexShader = `
+uniform float iTime;
+uniform vec2 iResolution;
+uniform vec2 iMouse;
 
-        {/* Case Studies Grid */}
-        <section className="py-12 md:py-20">
-          <div className="container mx-auto px-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-              {caseStudies.map((study, index) => (
-                <motion.div
+varying vec2 vUv;
+
+uniform vec2 uMeshSize;
+uniform vec2 uMediaSize;
+uniform vec2 uOffset;
+uniform float uOpacity;
+uniform float uMouseEnter;
+uniform float uMouseEnterMask;
+
+const float PI = 3.14159265359;
+
+vec2 scale(in vec2 st, in vec2 s, in vec2 center) {
+    return (st - center) * s + center;
+}
+
+float saturate(float a) {
+    return clamp(a, 0., 1.);
+}
+
+vec3 deformationCurve(vec3 position, vec2 uv, vec2 offset) {
+    position.x = position.x + (sin(uv.y * PI) * offset.x);
+    position.y = position.y + (sin(uv.x * PI) * offset.y);
+    return position;
+}
+
+vec2 getUVScale() {
+    float d = length(uMeshSize);
+    float longEdge = max(uMeshSize.x, uMeshSize.y);
+    float dRatio = d / longEdge;
+    float mRatio = uMeshSize.x / uMeshSize.y;
+    return vec2(mRatio / dRatio);
+}
+
+float getProgress(float activation, float latestStart, float progress, float progressLimit) {
+    float startAt = activation * latestStart;
+    float pr = smoothstep(startAt, 1., progress);
+    float p = min(saturate(pr / progressLimit), saturate((1. - pr) / (1. - progressLimit)));
+    return p;
+}
+
+vec3 distort(vec3 p) {
+    vec2 uvDistortion = uv;
+    vec2 uvScale = getUVScale();
+    uvDistortion = scale(uvDistortion, uvScale, vec2(.5));
+    uvDistortion = (uvDistortion - .5) * 2.;
+    float d = length(uvDistortion);
+    float pr = getProgress(d, .8, uMouseEnter, .75) * .08;
+    p.xy *= (1. + pr);
+    return p;
+}
+
+void main() {
+    vec3 p = position;
+    p = deformationCurve(p, uv, uOffset);
+    p = distort(p);
+    gl_Position = projectionMatrix * modelViewMatrix * vec4(p, 1.);
+    
+    vUv = uv;
+}
+`;
+
+const fragmentShader = `
+uniform float iTime;
+uniform vec2 iResolution;
+uniform vec2 iMouse;
+
+varying vec2 vUv;
+
+uniform sampler2D iChannel0;
+
+uniform vec2 uMeshSize;
+uniform vec2 uMediaSize;
+uniform vec2 uOffset;
+uniform float uOpacity;
+uniform float uMouseEnter;
+uniform float uMouseEnterMask;
+
+vec2 cover(vec2 s, vec2 i, vec2 uv) {
+    float rs = s.x / s.y;
+    float ri = i.x / i.y;
+    vec2 new = rs < ri ? vec2(i.x * s.y / i.y, s.y) : vec2(s.x, i.y * s.x / i.x);
+    vec2 offset = (rs < ri ? vec2((new.x - s.x) / 2., 0.) : vec2(0., (new.y - s.y) / 2.)) / new;
+    uv = uv * s / new + offset;
+    return uv;
+}
+
+vec2 scale(in vec2 st, in vec2 s, in vec2 center) {
+    return (st - center) * s + center;
+}
+
+vec2 ratio2(in vec2 v, in vec2 s) {
+    return mix(vec2(v.x, v.y * (s.y / s.x)),
+    vec2((v.x * s.x / s.y), v.y),
+    step(s.x, s.y));
+}
+
+vec2 distort(vec2 uv) {
+    uv -= .5;
+    
+    float mRatio = uMeshSize.x / uMeshSize.y;
+    
+    float pUvX = pow(uv.x * mRatio, 2.);
+    float pUvY = pow(uv.y, 2.);
+    float pSum = pUvX + pUvY;
+    float multiplier = 10. * (1. - uMouseEnter);
+    float strength = 1. - multiplier * pSum;
+    uv *= strength;
+    
+    uv += .5;
+    return uv;
+}
+
+float getMaskDist(vec2 uv) {
+    uv = uv * 2. - 1.;
+    uv = ratio2(uv, uMeshSize);
+    float d = length(uv);
+    float aspectXY = uMeshSize.x / uMeshSize.y;
+    float aspectYX = uMeshSize.y / uMeshSize.x;
+    float aspect = min(aspectXY, aspectYX);
+    d /= sqrt(1. + pow(aspect, 2.));
+    return d;
+}
+
+void main() {
+    vec2 uv = vUv;
+    uv = cover(uMeshSize, uMediaSize.xy, uv);
+    
+    float d = getMaskDist(uv);
+    float mask = 1. - step(uMouseEnterMask, d);
+    
+    uv = scale(uv, vec2(1. / (1. + (1. - uMouseEnter) * .25)), vec2(.5));
+    
+    uv = distort(uv);
+    
+    vec4 tex = texture2D(iChannel0, uv);
+    vec3 color = tex.rgb;
+    float alpha = mask * uOpacity;
+    gl_FragColor = vec4(color, alpha);
+}
+`;
+
+const CaseStudies = () => {
+  const canvasRef = useRef<HTMLDivElement>(null);
+  const hoverImgRef = useRef<HTMLImageElement>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
+  const sceneRef = useRef<{
+    scene?: THREE.Scene;
+    camera?: THREE.Camera;
+    renderer?: THREE.WebGLRenderer;
+    material?: THREE.ShaderMaterial;
+    mesh?: THREE.Mesh;
+    mouse: { x: number; y: number };
+    offset: { x: number; y: number };
+    animationId?: number;
+  }>({
+    mouse: { x: 0, y: 0 },
+    offset: { x: 0, y: 0 }
+  });
+
+  useEffect(() => {
+    // Check if mobile
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  useEffect(() => {
+    if (isMobile || !canvasRef.current) return;
+
+    // Hide loading screen after a delay
+    const loadingTimer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1500);
+
+    // Setup Three.js scene
+    const scene = new THREE.Scene();
+    const camera = new THREE.OrthographicCamera(
+      -window.innerWidth / 2,
+      window.innerWidth / 2,
+      window.innerHeight / 2,
+      -window.innerHeight / 2,
+      -1000,
+      1000
+    );
+    camera.position.z = 1;
+
+    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    canvasRef.current.appendChild(renderer.domElement);
+
+    // Create geometry and material
+    const geometry = new THREE.PlaneGeometry(1, 1, 64, 64);
+    const material = new THREE.ShaderMaterial({
+      vertexShader,
+      fragmentShader,
+      transparent: true,
+      uniforms: {
+        iTime: { value: 0 },
+        iResolution: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) },
+        iMouse: { value: new THREE.Vector2(0, 0) },
+        iChannel0: { value: null },
+        uMeshSize: { value: new THREE.Vector2(0, 0) },
+        uMediaSize: { value: new THREE.Vector2(0, 0) },
+        uOffset: { value: new THREE.Vector2(0, 0) },
+        uOpacity: { value: 0 },
+        uMouseEnter: { value: 0 },
+        uMouseEnterMask: { value: 0 }
+      }
+    });
+
+    const mesh = new THREE.Mesh(geometry, material);
+    const imgWidth = 366 * 0.9;
+    const imgHeight = 450 * 0.9;
+    mesh.scale.set(imgWidth, imgHeight, 1);
+    scene.add(mesh);
+
+    sceneRef.current = { scene, camera, renderer, material, mesh, mouse: { x: 0, y: 0 }, offset: { x: 0, y: 0 } };
+
+    // Mouse move handler
+    const handleMouseMove = (e: MouseEvent) => {
+      const x = (e.clientX / window.innerWidth) * 2 - 1;
+      const y = -(e.clientY / window.innerHeight) * 2 + 1;
+      sceneRef.current.mouse = { x, y };
+
+      if (hoverImgRef.current) {
+        gsap.to(hoverImgRef.current, {
+          x: e.clientX - imgWidth / 2,
+          y: e.clientY - imgHeight / 2,
+          duration: 0.8,
+          ease: "power2.out"
+        });
+      }
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+
+    // Animation loop
+    const animate = () => {
+      sceneRef.current.animationId = requestAnimationFrame(animate);
+
+      if (material && mesh) {
+        // Lerp for smooth following
+        sceneRef.current.offset.x += (sceneRef.current.mouse.x - sceneRef.current.offset.x) * 0.1;
+        sceneRef.current.offset.y += (sceneRef.current.mouse.y - sceneRef.current.offset.y) * 0.1;
+
+        material.uniforms.uOffset.value = new THREE.Vector2(
+          (sceneRef.current.mouse.x - sceneRef.current.offset.x) * 1,
+          (sceneRef.current.mouse.y - sceneRef.current.offset.y) * 1
+        );
+
+        gsap.to(mesh.position, {
+          x: sceneRef.current.mouse.x * (window.innerWidth / 2),
+          y: sceneRef.current.mouse.y * (window.innerHeight / 2),
+          duration: 0.8,
+          ease: "power2.out"
+        });
+
+        material.uniforms.iTime.value += 0.01;
+        renderer.render(scene, camera);
+      }
+    };
+    animate();
+
+    // Handle window resize
+    const handleResize = () => {
+      camera.left = -window.innerWidth / 2;
+      camera.right = window.innerWidth / 2;
+      camera.top = window.innerHeight / 2;
+      camera.bottom = -window.innerHeight / 2;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      material.uniforms.iResolution.value = new THREE.Vector2(window.innerWidth, window.innerHeight);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      clearTimeout(loadingTimer);
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('resize', handleResize);
+      if (sceneRef.current.animationId) {
+        cancelAnimationFrame(sceneRef.current.animationId);
+      }
+      if (renderer) {
+        renderer.dispose();
+      }
+      if (geometry) {
+        geometry.dispose();
+      }
+      if (material) {
+        material.dispose();
+      }
+      if (canvasRef.current && renderer.domElement) {
+        canvasRef.current.removeChild(renderer.domElement);
+      }
+    };
+  }, [isMobile]);
+
+  const handleItemHover = (study: typeof caseStudies[0]) => {
+    if (isMobile) return;
+
+    const { material, mesh } = sceneRef.current;
+    if (!material || !hoverImgRef.current) return;
+
+    hoverImgRef.current.src = study.image;
+
+    const loader = new THREE.TextureLoader();
+    loader.load(study.image, (texture) => {
+      material.uniforms.iChannel0.value = texture;
+      material.uniforms.uMeshSize.value = new THREE.Vector2(mesh!.scale.x, mesh!.scale.y);
+      material.uniforms.uMediaSize.value = new THREE.Vector2(texture.image.width, texture.image.height);
+
+      gsap.to(material.uniforms.uOpacity, { value: 1, duration: 0.3 });
+      gsap.fromTo(material.uniforms.uMouseEnter, { value: 0 }, { value: 1, duration: 1.2, ease: "power2.out" });
+      gsap.fromTo(material.uniforms.uMouseEnterMask, { value: 0 }, { value: 1, duration: 0.7, ease: "power2.out" });
+    });
+  };
+
+  const handleGalleryLeave = () => {
+    if (isMobile) return;
+
+    const { material } = sceneRef.current;
+    if (!material) return;
+
+    gsap.to(material.uniforms.uOpacity, { value: 0, duration: 0.3 });
+  };
+
+  return (
+    <div className="relative bg-black min-h-screen">
+      <Header />
+      
+      {/* Loading Screen */}
+      {isLoading && !isMobile && (
+        <div className="fixed z-50 top-0 left-0 w-screen h-screen transition-all duration-300 bg-black flex items-center justify-center">
+          <div className="loading text-white text-3xl tracking-widest">
+            {['L', 'O', 'A', 'D', 'I', 'N', 'G'].map((letter, i) => (
+              <span key={i} style={{ '--i': i } as React.CSSProperties} className="inline-block animate-blur">
+                {letter}
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* WebGL Canvas */}
+      {!isMobile && (
+        <div ref={canvasRef} className="fixed z-0 top-0 left-0 w-screen h-screen overflow-hidden pointer-events-none" />
+      )}
+
+      {/* Main Content */}
+      <div className="relative z-10 w-screen min-h-screen overflow-hidden pt-20">
+        <div className="flex items-center justify-center min-h-screen py-20">
+          <div className="mx-auto w-full px-4">
+            <div 
+              className="gallery flex flex-col divide-y-2 divide-solid divide-white mx-auto" 
+              style={{ maxWidth: '45rem' }}
+              onMouseLeave={handleGalleryLeave}
+            >
+              {caseStudies.map((study) => (
+                <div
                   key={study.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.2 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className="gallery-item text-lg md:text-xl py-8 md:py-10 text-white cursor-pointer transition-opacity hover:opacity-70"
+                  onMouseEnter={() => handleItemHover(study)}
                 >
-                  <Card className="h-full hover:shadow-lg transition-shadow duration-300 group">
-                    <div className="overflow-hidden">
-                      <img 
-                        src={study.image} 
-                        alt={study.title}
-                        className="w-full h-48 md:h-56 object-cover group-hover:scale-105 transition-transform duration-500"
-                      />
-                    </div>
-                    <CardHeader className="p-4 md:p-6">
-                      <div className="flex flex-wrap gap-2 mb-3">
-                        {study.tags.slice(0, 2).map((tag) => (
-                          <span key={tag} className="text-xs bg-muted px-2 py-1 text-muted-foreground">
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                      <CardDescription className="text-sm text-primary font-medium">
-                        {study.category}
-                      </CardDescription>
-                      <CardTitle className="text-lg md:text-xl leading-tight">{study.title}</CardTitle>
-                      <p className="text-sm text-muted-foreground mt-2">
-                        Client: {study.client}
-                      </p>
-                    </CardHeader>
-                    <CardContent className="p-4 md:p-6 pt-0">
-                      <p className="text-sm text-muted-foreground mb-4 line-clamp-3">
-                        {study.description}
-                      </p>
-                      <div className="space-y-2 mb-4">
-                        <h4 className="text-sm font-semibold">Key Results:</h4>
-                        <ul className="text-xs text-muted-foreground space-y-1">
-                          {study.results.slice(0, 2).map((result, idx) => (
-                            <li key={idx} className="flex items-start">
-                              <span className="w-1 h-1 bg-primary rounded-full mt-2 mr-2 flex-shrink-0"></span>
-                              {result}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                      <Button variant="outline" size="sm" className="w-full group">
-                        View Details
-                        <ExternalLink className="ml-2 h-3 w-3 group-hover:translate-x-1 transition-transform" />
-                      </Button>
-                    </CardContent>
-                  </Card>
-                </motion.div>
+                  <div className="font-semibold">{study.title}</div>
+                  <div className="text-sm md:text-base text-white/60 mt-2">{study.client} • {study.category}</div>
+                </div>
               ))}
             </div>
           </div>
-        </section>
+        </div>
+      </div>
 
-        {/* CTA Section */}
-        <section className="py-12 md:py-20 bg-muted/30">
-          <div className="container mx-auto text-center px-4">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.4 }}
-              transition={{ duration: 0.6 }}
-            >
-              <h2 className="text-2xl md:text-4xl font-bold mb-4">
-                Ready to Start Your Project?
-              </h2>
-              <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
-                Let's discuss how we can help transform your business with innovative digital solutions.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button size="lg">
-                  Start Your Project <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-                <Button size="lg" variant="outline">
-                  View All Services
-                </Button>
-              </div>
-            </motion.div>
-          </div>
-        </section>
-      </main>
+      {/* Hover Image */}
+      {!isMobile && (
+        <img 
+          ref={hoverImgRef}
+          className="hover-img fixed block opacity-0 pointer-events-none z-20" 
+          alt="" 
+          style={{ width: '329px', height: '405px' }}
+        />
+      )}
+
       <Footer />
+
+      <style>{`
+        @keyframes blur {
+          to {
+            filter: blur(5px);
+          }
+        }
+
+        .loading span {
+          animation: blur 1.5s calc(var(--i) / 5 * 1s) alternate infinite;
+        }
+
+        .hover-img {
+          --scale: 0.9;
+        }
+      `}</style>
     </div>
   );
 };
