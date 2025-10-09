@@ -1,186 +1,135 @@
 
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { ArrowRight, ExternalLink } from "lucide-react";
+import { useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
 const caseStudies = [
-  {
-    id: 1,
-    title: "E-commerce Platform Redesign",
-    client: "Fashion Forward",
-    category: "Web Design & Development",
-    description: "Complete redesign of an e-commerce platform that increased conversion rates by 45% and improved user engagement.",
-    image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1999&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    results: ["45% increase in conversion rate", "60% reduction in bounce rate", "3x faster page load times"],
-    tags: ["React", "Node.js", "MongoDB", "Stripe API"]
-  },
-  {
-    id: 2,
-    title: "Mobile Banking App",
-    client: "SecureBank",
-    category: "Mobile App Development",
-    description: "Revolutionary mobile banking app with advanced security features and intuitive user experience.",
-    image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    results: ["1M+ downloads in first month", "4.8/5 app store rating", "50% increase in digital transactions"],
-    tags: ["React Native", "Biometric Auth", "Real-time Analytics", "Cloud Security"]
-  },
-  {
-    id: 3,
-    title: "Healthcare Management System",
-    client: "MediCare Solutions",
-    category: "Web Application",
-    description: "Comprehensive healthcare management system streamlining patient care and administrative processes.",
-    image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    results: ["40% reduction in admin time", "99.9% system uptime", "HIPAA compliant"],
-    tags: ["Vue.js", "Python", "PostgreSQL", "AWS"]
-  },
-  {
-    id: 4,
-    title: "AI-Powered Analytics Dashboard",
-    client: "DataTech Corp",
-    category: "Data Visualization",
-    description: "Advanced analytics dashboard with AI-powered insights for better business decision making.",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    results: ["35% faster decision making", "Real-time data processing", "Custom ML models"],
-    tags: ["D3.js", "TensorFlow", "GraphQL", "Docker"]
-  },
-  {
-    id: 5,
-    title: "Social Learning Platform",
-    client: "EduConnect",
-    category: "EdTech Platform",
-    description: "Interactive learning platform connecting students and educators worldwide with gamification features.",
-    image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    results: ["100K+ active users", "85% course completion rate", "Available in 12 languages"],
-    tags: ["React", "Firebase", "WebRTC", "PWA"]
-  },
-  {
-    id: 6,
-    title: "Smart Home IoT Dashboard",
-    client: "HomeAutomation Pro",
-    category: "IoT Application",
-    description: "Comprehensive IoT dashboard for smart home management with real-time monitoring and control.",
-    image: "https://images.unsplash.com/photo-1558036117-15d82a90b9b1?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    results: ["30% energy savings", "24/7 monitoring", "Voice control integration"],
-    tags: ["Angular", "MQTT", "InfluxDB", "Raspberry Pi"]
-  }
+  { id: 1, title: "PPD Calculator", year: "2025", image: "https://cdn.cosmos.so/f15d4e79-18e3-4eeb-91a3-165634bedbe2.?format=jpeg", tags: ["Web Development"], slug: "ppd-calculator", type: "project" },
+  { id: 2, title: "Vega", year: "2023", image: "https://cdn.cosmos.so/33c3609d-d4b5-4c55-96f6-31bccc54bb3f?format=jpeg", tags: ["DeFi", "Blockchain"], slug: "vega", type: "project" },
+  { id: 3, title: "TurboETH", year: "2023", image: "https://cdn.cosmos.so/c3711dd7-4f87-4dd2-9433-7c3b951d9ee4?format=jpeg", tags: ["Ethereum", "Infrastructure"], slug: "turboeth", type: "project" },
+  { id: 4, title: "Mask Network x mStable", year: "2021", image: "https://cdn.cosmos.so/dabe6846-02e4-4e6a-8389-66ae3ebe63a7?format=jpeg", tags: ["Integration", "DeFi"], slug: "mask-mstable", type: "project" },
+  { id: 5, title: "HIE Agency Website", year: "2025", image: "https://cdn.cosmos.so/a6425fe9-0693-48ae-8d8a-dec2d0bc98d7.?format=jpeg", tags: ["Web Design"], slug: "HIE-website", type: "project" },
+  { id: 6, title: "Hritwik Portfolio", year: "2024", image: "https://cdn.cosmos.so/f8af6b2b-75cf-4d42-b4e8-81c46d7fce80?format=jpeg", tags: ["Portfolio", "React"], slug: "hritwik-portfolio", type: "project" },
+  { id: 7, title: "HackoFiesta", year: "2020", image: "https://cdn.cosmos.so/56bb5ac7-dd5d-4cd7-9537-5da37372d79d?format=jpeg", tags: ["Hackathon", "Winner"], slug: "hackofiesta", type: "hackathon-winner" },
+  { id: 8, title: "Hack Gujarat ", year: "2020", image: "https://cdn.cosmos.so/33c3609d-d4b5-4c55-96f6-31bccc54bb3f?format=jpeg", tags: ["Hackathon", "Winner"], slug: "hack-gujarat", type: "hackathon-winner" },
+  { id: 9, title: "IOTEX India ", year: "2021", image: "https://cdn.cosmos.so/5c452266-a212-41d4-be23-a5aa64fa677e?format=jpeg", tags: ["Hackathon", "IoT"], slug: "iotex-india", type: "hackathon-winner" },
+  { id: 10, title: "Hack-a-Solution ", year: "2020", image: "https://cdn.cosmos.so/c9becea2-e849-4e6b-a802-249d3b6925c6?format=jpeg", tags: ["Hackathon"], slug: "hack-a-solution", type: "hackathon-winner" },
+  { id: 11, title: "HackAtom V ", year: "2020", image: "https://i.redd.it/o8lw993rcqz91.gif", tags: ["Hackathon", "Cosmos"], slug: "hackatom-v", type: "hackathon-winner" },
+  { id: 12, title: "Sovrython", year: "2021", image: "https://i.redd.it/zlx4bhx1aq701.gif", tags: ["Hackathon"], slug: "sovrython", type: "hackathon-winner" },
+  { id: 13, title: "ETHCC ", year: "2021", image: "https://cdn.cosmos.so/31f63bda-4dc6-476b-913b-232b1c12c9ce?format=jpeg", tags: ["Ethereum", "Hackathon"], slug: "ethcc", type: "hackathon-winner" },
+  { id: 14, title: "DefiSummer ", year: "2021", image: "https://cdn.cosmos.so/979fed3d-3156-43e0-a595-0218a189f09b.?format=jpeg", tags: ["DeFi", "Hackathon"], slug: "defisummer", type: "hackathon-winner" },
+  { id: 15, title: "Subql", year: "2025", image: "https://i.pinimg.com/originals/09/f4/a4/09f4a4dcaa98868f19be42f177e3559a.gif", tags: ["Blockchain", "API"], slug: "subql", type: "project" },
+  { id: 16, title: "Subgraphs NFT20", year: "2021", image: "https://i.pinimg.com/originals/1f/1e/6f/1f1e6f6e7c70a5bb21fc475d8dbe699f.gif", tags: ["Graph", "NFT"], slug: "subgraphs-nft20", type: "project" },
+  { id: 17, title: "WalletConnect/Web3Auth", year: "2021", image: "https://cdn.cosmos.so/00745561-e86f-468b-b086-a9e5f4faedf2?format=jpeg", tags: ["Authentication", "Web3"], slug: "walletconnect-web3auth", type: "project" },
+  { id: 18, title: "Moralis → Web3UIKit", year: "2022", image: "https://cdn.cosmos.so/cfe37780-affd-4b7b-9dd7-58c044832cab?format=jpeg", tags: ["UI Kit", "Web3"], slug: "moralis-web3uikit", type: "project" },
+  { id: 19, title: "Cork Protocol Audit", year: "2022", image: "https://cdn.cosmos.so/00745561-e86f-468b-b086-a9e5f4faedf2?format=jpeg", tags: ["Security", "Web3"], slug: "cork-protocol-audit", type: "project" }
 ];
 
 const CaseStudies = () => {
-  return (
-    <div className="bg-background">
-      <Header />
-      <main>
-        {/* Hero Section */}
-        <section className="py-12 md:py-20">
-          <div className="container mx-auto text-center px-4">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              <p className="text-sm font-semibold uppercase text-primary tracking-widest">Our Work</p>
-              <h1 className="text-3xl md:text-5xl font-bold mt-4 leading-tight">Case Studies</h1>
-              <p className="text-muted-foreground mt-4 text-lg max-w-2xl mx-auto">
-                Discover how we've helped businesses transform their digital presence and achieve remarkable results.
-              </p>
-            </motion.div>
-          </div>
-        </section>
+  const galleryRef = useRef<HTMLDivElement>(null);
+  const hoverImgRef = useRef<HTMLImageElement>(null);
 
-        {/* Case Studies Grid */}
-        <section className="py-12 md:py-20">
-          <div className="container mx-auto px-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-              {caseStudies.map((study, index) => (
-                <motion.div
+  useEffect(() => {
+    console.log('Gallery setup starting...');
+    import('gsap').then((gsapModule: any) => {
+      const gsap = gsapModule.gsap || gsapModule.default;
+      console.log('GSAP loaded:', gsap);
+
+      // Gallery setup
+      const galleryEl = galleryRef.current;
+      const hoverImg = hoverImgRef.current;
+
+      if (galleryEl && hoverImg) {
+        console.log('Gallery elements found');
+        const galleryItems = Array.from(galleryEl.querySelectorAll('.gallery-item')) as HTMLElement[];
+
+        galleryItems.forEach((item) => {
+          item.addEventListener('mouseenter', () => {
+            console.log('Hover enter, img src:', item.dataset.glImg);
+            if (hoverImg && item.dataset.glImg) {
+              hoverImg.src = item.dataset.glImg;
+              gsap.to(hoverImg, {
+                opacity: 1,
+                scale: 1,
+                duration: 0.3,
+                ease: 'power2.out'
+              });
+            }
+          });
+
+          item.addEventListener('mouseleave', () => {
+            gsap.to(hoverImg, {
+              opacity: 0,
+              scale: 0.9,
+              duration: 0.3,
+              ease: 'power2.in'
+            });
+          });
+        });
+
+        // Mouse move for hover image positioning
+        window.addEventListener('mousemove', (e) => {
+          gsap.to(hoverImg, {
+            x: e.clientX - hoverImg.offsetWidth / 2,
+            y: e.clientY - hoverImg.offsetHeight / 2,
+            duration: 0.1,
+            ease: 'none'
+          });
+        });
+      } else {
+        console.error('Gallery elements not found:', galleryEl, hoverImg);
+      }
+    }).catch((error) => console.error('Error loading GSAP:', error));
+  }, []);
+
+  return (
+    <div className="bg-background min-h-screen">
+      <Header />
+      {/* <section className="py-8 md:py-12">
+        <div className="container mx-auto text-center px-4">
+          <div className="flex flex-col items-center">
+            <h1 className="text-3xl md:text-5xl font-bold mt-8 leading-tight">Case</h1>
+          </div>
+        </div>
+      </section> */}
+      <div className="relative w-screen min-h-screen flex flex-col justify-center">
+        <div className="flex items-center justify-center w-full flex-1 relative">
+          <div className="mx-auto">
+            <div className="gallery flex flex-col divide-y-2 divide-gray-300" style={{width: 'clamp(98vw, 85vw, 45rem)'}} ref={galleryRef}>
+              {caseStudies.map((study) => (
+                <div
                   key={study.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.2 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className="gallery-item cursor-pointer py-6 px-4 relative"
+                  data-gl-img={study.image}
+                  data-gl-img-name={`tex${study.id}`}
+                  onClick={() => {
+                    window.location.href = `/case-studies/${study.slug}`;
+                  }}
                 >
-                  <Card className="h-full hover:shadow-lg transition-shadow duration-300 group">
-                    <div className="overflow-hidden">
-                      <img 
-                        src={study.image} 
-                        alt={study.title}
-                        className="w-full h-48 md:h-56 object-cover group-hover:scale-105 transition-transform duration-500"
-                      />
+                  {study.year && (
+                    <div className="absolute top-0 left-0">
+                      <div className="font-light text-lg text-foreground/70">
+                        {study.year}
+                      </div>
                     </div>
-                    <CardHeader className="p-4 md:p-6">
-                      <div className="flex flex-wrap gap-2 mb-3">
-                        {study.tags.slice(0, 2).map((tag) => (
-                          <span key={tag} className="text-xs bg-muted px-2 py-1 text-muted-foreground">
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                      <CardDescription className="text-sm text-primary font-medium">
-                        {study.category}
-                      </CardDescription>
-                      <CardTitle className="text-lg md:text-xl leading-tight">{study.title}</CardTitle>
-                      <p className="text-sm text-muted-foreground mt-2">
-                        Client: {study.client}
-                      </p>
-                    </CardHeader>
-                    <CardContent className="p-4 md:p-6 pt-0">
-                      <p className="text-sm text-muted-foreground mb-4 line-clamp-3">
-                        {study.description}
-                      </p>
-                      <div className="space-y-2 mb-4">
-                        <h4 className="text-sm font-semibold">Key Results:</h4>
-                        <ul className="text-xs text-muted-foreground space-y-1">
-                          {study.results.slice(0, 2).map((result, idx) => (
-                            <li key={idx} className="flex items-start">
-                              <span className="w-1 h-1 bg-primary rounded-full mt-2 mr-2 flex-shrink-0"></span>
-                              {result}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                      <Button variant="outline" size="sm" className="w-full group">
-                        View Details
-                        <ExternalLink className="ml-2 h-3 w-3 group-hover:translate-x-1 transition-transform" />
-                      </Button>
-                    </CardContent>
-                  </Card>
-                </motion.div>
+                  )}
+                  <div className="absolute top-0 right-0">
+                    <div className=" text-lg text-muted-foreground uppercase tracking-wide">
+                      {study.type.replace('-', ' ')}
+                    </div>
+                  </div>
+                  <div className="text-center font-display font-bold text-8xl text-foreground leading-tight pt-8">
+                    {study.title}
+                  </div>
+                </div>
               ))}
             </div>
           </div>
-        </section>
-
-        {/* CTA Section */}
-        <section className="py-12 md:py-20 bg-muted/30">
-          <div className="container mx-auto text-center px-4">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.4 }}
-              transition={{ duration: 0.6 }}
-            >
-              <h2 className="text-2xl md:text-4xl font-bold mb-4">
-                Ready to Start Your Project?
-              </h2>
-              <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
-                Let's discuss how we can help transform your business with innovative digital solutions.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button size="lg">
-                  Start Your Project <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-                <Button size="lg" variant="outline">
-                  View All Services
-                </Button>
-              </div>
-            </motion.div>
-          </div>
-        </section>
-      </main>
+        </div>
+        <img ref={hoverImgRef} className="hover-img" alt="" />
+      </div>
       <Footer />
     </div>
   );

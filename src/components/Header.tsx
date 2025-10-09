@@ -68,9 +68,10 @@ import { Link } from "react-router-dom";
 
 // Navigation items
 const navItems = [
-  { title: "Services", href: "/services" },
+  // { title: "Services", href: "/services" },
   { title: "Blog", href: "/blog" },
   { title: "Testimonials", href: "/testimonials" }, // This will be handled in the JSX
+  { title: "Case Studies", href: "/case-studies" }, // This will be handled in the JSX
 ];
 
 // Studio items for dropdown
@@ -90,12 +91,12 @@ const Header = () => {
   return (
     <header className="fixed top-0 left-0 right-0 z-40 bg-background/80 backdrop-blur-sm">
       <div className="container mx-auto flex h-20 items-center justify-between">
-        <Link to="/" className="text-lg font-bold text-foreground">InnoV</Link>
+        <Link to="/" className="text-lg font-bold text-foreground">HIE</Link>
         
         {/* --- Desktop Navigation --- */}
         <nav className="hidden md:flex items-center gap-6">
           {/* Our Work Dropdown */}
-          <HoverCard>
+          {/* <HoverCard>
             <HoverCardTrigger className="flex items-center gap-1 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors animated-underline cursor-none">
               Our Work
               <ChevronDownIcon className="w-4 h-4" />
@@ -113,10 +114,10 @@ const Header = () => {
                 ))}
               </div>
             </HoverCardContent>
-          </HoverCard>
+          </HoverCard> */}
 
           {/* Free Tools Dropdown */}
-          <HoverCard>
+          {/* <HoverCard>
             <HoverCardTrigger className="flex items-center gap-1 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors animated-underline cursor-none">
               Free Tools
               <ChevronDownIcon className="w-4 h-4" />
@@ -134,7 +135,7 @@ const Header = () => {
                 ))}
               </div>
             </HoverCardContent>
-          </HoverCard>
+          </HoverCard> */}
 
           {navItems.map((item) => {
             // Check if the current item is "Testimonials"

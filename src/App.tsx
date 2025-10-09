@@ -10,6 +10,7 @@ import { CursorProvider } from "./contexts/CursorContext";
 import CustomCursor from "./components/CustomCursor";
 import { ReactLenis } from "@studio-freight/react-lenis";
 import CaseStudies from "./pages/CaseStudies";
+import CaseStudyDetail from "./pages/CaseStudyDetail";
 import ServicesPage from "./pages/ServicesPage";
 import ContactUs from "./pages/ContactUs";
 import Testimonials from "./pages/Testimonials";
@@ -51,17 +52,18 @@ const AppContent = () => {
       <Routes>
         <Route path="/" element={<Index />} />
         <Route path="/case-studies" element={<CaseStudies />} />
-        <Route path="/services" element={<ServicesPage />} />
-        <Route path="/testimonials" element={<Testimonials />} />
+        <Route path="/case-studies/:slug" element={<CaseStudyDetail />} />
+        {/* <Route path="/services" element={<ServicesPage />} /> */}
+        {/* <Route path="/testimonials" element={<Testimonials />} /> */}
         <Route path="/contact-us" element={<ContactUs />} />
         <Route path="/terms-of-use" element={<TermsOfUse />} />
         <Route path="/works" element={<Works />} />
         <Route path="/blog" element={<BlogPage />} />
-        <Route path="/studio/yin" element={<YinStudio />} />
-        <Route path="/studio/yang" element={<YangStudio />} />
-        <Route path="/studio/navasora" element={<NavasoreStudio />} />
-        <Route path="/url-shortener" element={<URLShortener />} />
-        <Route path="/website-analyzer" element={<WebsiteAnalyzer />} />
+        {/* <Route path="/studio/yin" element={<YinStudio />} /> */}
+        {/* <Route path="/studio/yang" element={<YangStudio />} /> */}
+        {/* <Route path="/studio/navasora" element={<NavasoreStudio />} /> */}
+        {/* <Route path="/url-shortener" element={<URLShortener />} /> */}
+        {/* <Route path="/website-analyzer" element={<WebsiteAnalyzer />} /> */}
 
         {/* <Route path="/privacy-policy" element={<PrivacyPolicy />} /> Soon */}
         {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

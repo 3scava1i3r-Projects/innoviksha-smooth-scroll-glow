@@ -20,7 +20,17 @@ export default {
 		},
 		extend: {
       fontFamily: {
-        sans: ["Nunito Sans", "sans-serif"],
+        // sans: ["sans-serif"],
+        display: ["AlphaLyrae", "sans-serif"],
+        ambroise: ["ambroise-firmin-std", "serif"],
+        modesto: ["modesto-condensed", "serif"],
+        minerva: ["minerva-modern", "sans-serif"],
+        manicotti: ["manicotti", "sans-serif"],
+        niagara: ["niagara", "serif"],
+        "house-cards": ["house-of-cards", "serif"],
+        ivymode: ["ivymode", "sans-serif"],
+        tenon: ["tenon", "sans-serif"],
+        "new-spirit": ["new-spirit-condensed", "serif"],
       },
 			colors: {
 				border: 'hsl(var(--border))',

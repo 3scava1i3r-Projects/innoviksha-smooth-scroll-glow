@@ -7,6 +7,7 @@ import Services from "@/components/Services";
 import Clients from "@/components/Clients";
 import FAQ from "@/components/FAQ";
 import CTA from "@/components/CTA";
+// import Footer2 from "@/components/Footer2";
 import Footer from "@/components/Footer";
 
 const Index = () => {

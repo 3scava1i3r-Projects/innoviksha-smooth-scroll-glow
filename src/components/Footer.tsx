@@ -115,9 +115,9 @@ const Footer = () => {
                         {/* The email is now in a list to match the style of other columns */}
                         <ul className="mt-4 space-y-2 text-muted-foreground text-xs">
                             <li>
-                                <a href="mailto:info@innoviksha.xyz" className="hover:text-foreground cursor-none">
+                                {/* <a href="mailto:info@innoviksha.xyz" className="hover:text-foreground cursor-none">
                                     info@innoviksha.xyz
-                                </a>
+                                </a> */}
                             </li>
                         </ul>
                         {/* <ul className="mt-4 space-y-2 text-muted-foreground text-xs">
@@ -125,7 +125,7 @@ const Footer = () => {
                         </ul> */}
                     </div>
                     <div>
-                        <h3 className="font-bold text-lg">Innoviksha</h3>
+                        <h3 className="font-bold text-lg">HIE Agency</h3>
                         <p className="text-muted-foreground mt-4 text-sm">Building elegant software and intelligent automation for growing businesses.</p>
                         
                         {/* Email added here */}
@@ -140,7 +140,7 @@ const Footer = () => {
                     </div>
                 </div>
                 <div className="mt-16 pt-8 border-t border-border/50 text-sm text-muted-foreground flex justify-between items-center">
-                    <p>© {new Date().getFullYear()} InnoV. All rights reserved. InnoV is a brand of Innoviksha</p>
+                    {/* <p>© {new Date().getFullYear()} HIE. All rights reserved. HIE is a brand of Innoviksha</p> */}
                     <div className="flex gap-4 font-semibold">
                         {/* <span className="cursor-none">Awwwards</span>
                         <span className="cursor-none">Clutch</span>
