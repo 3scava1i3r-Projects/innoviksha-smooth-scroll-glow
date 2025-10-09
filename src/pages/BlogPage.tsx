@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import Header from '@/components/Header';
-import Footer2 from '@/components/Footer2';
+import Footer from '@/components/Footer';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -136,7 +136,7 @@ const BlogPage = () => {
             ))}
           </div>
         </main>
-        <Footer2 />
+        <Footer />
       </div>
     );
   }
@@ -157,7 +157,7 @@ const BlogPage = () => {
             </button>
           </div>
         </div>
-        <Footer2 />
+        <Footer />
       </div>
     );
   }
@@ -341,7 +341,7 @@ const BlogPage = () => {
         )}
       </main>
       
-      <Footer2 />
+      <Footer />
     </div>
   );
 };
