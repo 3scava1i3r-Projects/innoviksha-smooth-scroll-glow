@@ -34,7 +34,7 @@ const BlogPage = () => {
         
         // Use RSS2JSON service to convert Medium RSS to JSON (free tier)
         const response = await fetch(
-          `https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@innovs`
+          `https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@hieagency`
         );
         
         if (!response.ok) {
@@ -269,7 +269,7 @@ const BlogPage = () => {
                 </div>
                 
                 <a 
-                  href="https://medium.com/@innovs" 
+                  href="https://medium.com/@hieagency" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 text-primary font-medium hover:underline"
