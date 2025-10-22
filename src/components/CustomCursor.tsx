@@ -115,6 +115,7 @@
 
 import React, { useEffect, useRef } from 'react';
 import { useCursor } from '../contexts/CursorContext';
+import { getPerformanceMode } from '@/utils/performance';
 
 const CustomCursor: React.FC = () => {
   const cursorRef = useRef<HTMLDivElement>(null);
@@ -122,13 +123,20 @@ const CustomCursor: React.FC = () => {
   
   // Check if running on Mac (different GPU handling)
   const isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
+  const performanceMode = getPerformanceMode();
   
   useEffect(() => {
     let x = -100;
     let y = -100;
     let rafId: number;
+    let lastUpdate = 0;
 
     const updatePosition = (e: MouseEvent) => {
+      // Throttle updates based on performance mode
+      const now = performance.now();
+      if (now - lastUpdate < performanceMode.cursorUpdateRate) return;
+      lastUpdate = now;
+
       // Mac Chrome specific: account for device pixel ratio and viewport scaling
       const devicePixelRatio = window.devicePixelRatio || 1;
       const isMacChrome = isMac && navigator.userAgent.includes('Chrome');
@@ -157,7 +165,7 @@ const CustomCursor: React.FC = () => {
       window.removeEventListener('mousemove', updatePosition);
       if (rafId) cancelAnimationFrame(rafId);
     };
-  }, []);
+  }, [performanceMode.cursorUpdateRate]);
 
   const size = cursorType === 'hover' ? 64 : 16;
   const bg = cursorType === 'hover' ? '#fff' : 'hsl(var(--primary))';

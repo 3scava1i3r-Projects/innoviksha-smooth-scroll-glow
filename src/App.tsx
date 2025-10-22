@@ -26,8 +26,9 @@ import WebsiteAnalyzer from "./pages/WebsiteAnalyzer";
 import ScrollToTop from "./components/ScrollToTop";
 import CookieConsent from "./components/CookieConsent";
 import { initGA, trackPageView } from "./lib/gtag";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import { isMacChrome } from "./utils/performance";
 
 const queryClient = new QueryClient();
 
@@ -73,21 +74,36 @@ const AppContent = () => {
   );
 };
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <CursorProvider>
-        <CustomCursor />
-        <ReactLenis root>
-          <BrowserRouter>
-            <AppContent />
-          </BrowserRouter>
-        </ReactLenis>
-      </CursorProvider>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+const App = () => {
+  const [useLenis, setUseLenis] = useState(true);
+
+  useEffect(() => {
+    // Disable Lenis on Mac Chrome for better performance
+    setUseLenis(!isMacChrome());
+  }, []);
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <CursorProvider>
+          <CustomCursor />
+          {useLenis ? (
+            <ReactLenis root>
+              <BrowserRouter>
+                <AppContent />
+              </BrowserRouter>
+            </ReactLenis>
+          ) : (
+            <BrowserRouter>
+              <AppContent />
+            </BrowserRouter>
+          )}
+        </CursorProvider>
+      </TooltipProvider>
+    </QueryClientProvider>
+  );
+};
 
 export default App;

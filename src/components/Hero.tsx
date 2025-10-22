@@ -2,6 +2,7 @@ import { useCursor } from "@/contexts/CursorContext";
 import { Award, Zap, Code } from 'lucide-react';
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence, Variants } from 'framer-motion';
+import { getPerformanceMode } from '@/utils/performance';
 
 const rotatingTexts = [
   "Build Your Custom SaaS",
@@ -19,16 +20,20 @@ const rotatingTexts = [
 const Hero = () => {
   const { setCursorType } = useCursor();
   const [textIndex, setTextIndex] = useState(0);
+  const performanceMode = getPerformanceMode();
 
   useEffect(() => {
+    // Slower rotation on Mac Chrome for better performance
+    const interval = performanceMode.reduceAnimations ? 4000 : 3000;
+    
     const textAnimationInterval = window.setInterval(() => {
       setTextIndex(prevIndex => (prevIndex + 1) % rotatingTexts.length);
-    }, 3000);
+    }, interval);
 
     return () => {
       clearInterval(textAnimationInterval);
     };
-  }, []);
+  }, [performanceMode.reduceAnimations]);
 
   const containerVariants: Variants = {
     hidden: { opacity: 0, y: 20 },
@@ -36,9 +41,9 @@ const Hero = () => {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.8,
+        duration: performanceMode.reduceAnimations ? 0.5 : 0.8,
         ease: "easeOut",
-        delay
+        delay: performanceMode.reduceAnimations ? delay * 0.7 : delay
       }
     })
   };
