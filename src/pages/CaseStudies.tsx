@@ -94,7 +94,7 @@ const CaseStudies = () => {
           </div>
         </div>
       </section> */}
-      <div className="relative w-screen min-h-screen flex flex-col justify-center">
+      <div className="relative w-screen min-h-screen flex flex-col justify-center pt-24">
         <div className="flex items-center justify-center w-full flex-1 relative">
           <div className="mx-auto">
             <div className="gallery flex flex-col divide-y-2 divide-gray-300" style={{width: 'clamp(98vw, 85vw, 45rem)'}} ref={galleryRef}>
