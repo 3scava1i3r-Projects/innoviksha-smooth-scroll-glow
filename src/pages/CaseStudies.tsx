@@ -87,14 +87,17 @@ const CaseStudies = () => {
   return (
     <div className="bg-background min-h-screen">
       <Header />
-      {/* <section className="py-8 md:py-12">
-        <div className="container mx-auto text-center px-4">
+      <section className="">
+        <div className="container mx-auto text-center px-4 pt-20">
           <div className="flex flex-col items-center">
-            <h1 className="text-3xl md:text-5xl font-bold mt-8 leading-tight">Case</h1>
+            <h1 className="text-4xl md:text-6xl font-bold">Case Studies</h1>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto mt-4">
+            Insights, tutorials, and thoughts on technology, development, and innovation from our team.
+          </p>
           </div>
         </div>
-      </section> */}
-      <div className="relative w-screen min-h-screen flex flex-col justify-center pt-24">
+      </section>
+      <div className="relative w-screen min-h-screen flex flex-col justify-center pt-4">
         <div className="flex items-center justify-center w-full flex-1 relative">
           <div className="mx-auto">
             <div className="gallery flex flex-col divide-y-2 divide-gray-300" style={{width: 'clamp(98vw, 85vw, 45rem)'}} ref={galleryRef}>
@@ -120,7 +123,7 @@ const CaseStudies = () => {
                       {study.type.replace('-', ' ')}
                     </div>
                   </div>
-                  <div className="text-center font-display font-bold text-8xl text-foreground leading-tight pt-8">
+                  <div className="text-center font-bold text-8xl text-foreground leading-tight pt-8">
                     {study.title}
                   </div>
                 </div>

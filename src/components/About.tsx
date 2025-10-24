@@ -14,7 +14,7 @@ const About = () => {
             onMouseEnter={() => setCursorType('default')}
             onMouseLeave={() => setCursorType('default')}
         >
-            <div className="container mx-auto text-center max-w-4xl">
+            <div className="container mx-auto text-center max-w-4xl py-28">
                 <p className="text-sm font-semibold uppercase text-primary tracking-widest">Our ethos</p>
                 <h2 className="mt-6 text-3xl md:text-4xl font-bold leading-tight tracking-tighter">
                     We are your dedicated engineering team, turning complex problems into elegant software and intelligent automation.

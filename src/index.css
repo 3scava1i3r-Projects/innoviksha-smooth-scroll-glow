@@ -182,7 +182,7 @@
     }
   }
   section {
-    @apply w-full py-20 md:py-32;
+    @apply w-full my-32;
   }
 
   /* Grain texture overlay for the entire site */

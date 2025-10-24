@@ -19,9 +19,9 @@ const CTA = () => {
                 </h2>
                 <div className="mt-10 flex justify-center gap-4">
                     <Button asChild size="lg">
-                        <Link to="/contact-us">Contact us <ArrowRight className="ml-2 h-4 w-4" /></Link>
+                        <Link to="/contact-us">Contact Us <ArrowRight className="ml-2 h-4 w-4" /></Link>
                     </Button>
-                    <Button size="lg" variant="outline"><a href="https://cal.com/InnoV" target="_blank" rel="noopener noreferrer">Schedule a Call</a></Button>
+                    <Button size="lg" variant="outline"><a href="https://cal.com/hieagency" target="_blank" rel="noopener noreferrer">Schedule a Call</a></Button>
                 </div>
             </div>
         </motion.section>

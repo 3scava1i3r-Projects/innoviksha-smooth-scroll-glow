@@ -50,7 +50,7 @@ const Hero = () => {
 
   return (
     <section 
-      className="pt-24 pb-20"
+      className="my-40 py-36"
       onMouseEnter={() => setCursorType('default')}
       onMouseLeave={() => setCursorType('default')}
     >

@@ -46,7 +46,7 @@
 //                   </Link>
 //                 ))}
 //                 <Button asChild className="mt-4">
-//                   <Link to="cal.com/InnoV">Schedule a Call</Link>
+//                   <Link to="cal.com/hieagency">Schedule a Call</Link>
 //                 </Button>
 //               </nav>
 //             </SheetContent>
@@ -89,7 +89,7 @@ const freeToolsItems = [
 
 const Header = () => {
   return (
-    <header className="fixed top-0 left-0 right-0 z-40 bg-background/80 backdrop-blur-sm">
+    <header className="fixed top-0 left-0 right-0 z-20 bg-background/80 backdrop-blur-sm">
       <div className="container mx-auto flex h-20 items-center justify-between">
         <Link to="/" className="text-lg font-bold text-foreground">HIE</Link>
         
@@ -165,7 +165,7 @@ const Header = () => {
         </nav>
 
         <Button asChild className="hidden md:inline-flex">
-            <Link to="/contact-us">Contact us</Link>
+            <a href="cal.com/hieagency">Schedule a Call</a>
         </Button>
         
         {/* --- Mobile Navigation (Sheet) --- */}
@@ -234,7 +234,7 @@ const Header = () => {
                 })}
                 <Button asChild className="mt-4">
                   {/* It's good practice to use a more descriptive name like "Schedule a Discovery Call" */}
-                  <a href="cal.com/InnoV">Schedule a Call</a>
+                  <a href="cal.com/hieagency">Schedule a Call</a>
                 </Button>
               </nav>
             </SheetContent>
